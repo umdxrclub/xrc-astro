@@ -1,0 +1,30 @@
+---
+import MemberCard from "../components/MemberCard.astro";
+import XRCPage from "../layouts/XRCPage.astro";
+import { fetchWebsite } from "../util/xrc-suite";
+import type { Member } from "../types/PayloadSchema";
+
+let website = await fetchWebsite();
+const members = website.members?.map((m) => m.member as Member) ?? [];
+---
+
+<XRCPage>
+  <h1>Current Leadership</h1>
+  <div class="leadership">
+    {members.map((m) => <MemberCard member={m} />)}
+  </div>
+  <h1>Past Leadership</h1>
+</XRCPage>
+
+<style>
+  .leadership {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-gap: 2em;
+  }
+
+  img {
+    width: 100px;
+    height: 100px;
+  }
+</style>

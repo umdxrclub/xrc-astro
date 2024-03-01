@@ -1,0 +1,41 @@
+---
+type Props = {
+  color?: string;
+  glow?: boolean;
+};
+
+const {color, glow} = Astro.props;
+
+---
+
+<div class="card" style={{"--card-color": color}}>
+  <slot />
+</div>
+<style>
+  .card {
+    --grid-size: 15px;
+    --card-color: var(--xr-purple);
+    --background-color: color-mix(in srgb, var(--card-color) 10%, transparent);
+    --line-color: color-mix(in srgb, var(--card-color) 7.5%, transparent);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 2.5em;
+    padding: 2em;
+    backdrop-filter: blur(20px);
+    background-size: var(--grid-size) var(--grid-size);
+    background-position: calc(var(--grid-size) / 2) calc(var(--grid-size) / 2);
+    box-shadow: inset 0 0 24px #00000065, 0 0 20px black;
+    border: solid var(--card-color) 0.35em;
+    background-image: linear-gradient(
+        to right,
+        var(--line-color) 1px,
+        transparent 1px
+      ),
+      linear-gradient(to bottom, var(--line-color) 1px, transparent 1px),
+      linear-gradient(var(--background-color), var(--background-color));
+  }
+
+  .glow {
+  }
+</style>

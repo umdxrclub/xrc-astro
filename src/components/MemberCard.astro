@@ -1,0 +1,77 @@
+---
+import Card from "../components/Card.astro";
+import type { Media, Member } from "../types/PayloadSchema";
+import type { MDIconType } from "./MDIcon.astro";
+import { xrcPath } from "../util/xrc-suite";
+import IconLinks, { type IconLink } from "./IconLinks.astro";
+
+type Props = {
+  member: Member;
+};
+
+const { member } = Astro.props;
+
+var profilePicUrl: string | undefined = undefined;
+if (typeof member.profile?.picture == "object" && member.profile.picture?.url)
+  profilePicUrl = xrcPath(member.profile.picture.url);
+
+const links: IconLink[] = (member.profile?.links ?? []).map((l) => {
+  var icon: MDIconType = "mdiWeb";
+
+  switch (l.type) {
+    case "email":
+      icon = "mdiEmail"
+      break;
+
+    case "github":
+      icon = "mdiGithub"
+      break;
+
+    case "linkedIn":
+      icon = "mdiLinkedin"
+      break;
+
+    case "youtube":
+      icon = "mdiYoutube"
+      break;
+  }
+
+  return {
+    icon: icon,
+    url: l.value,
+  };
+});
+---
+
+<Card>
+  <div>
+    <img src={profilePicUrl ?? "/img/xrc.png"} />
+    <h2>{member.name}</h2>
+    <h4>{member.title}</h4>
+    <IconLinks links={links} scale={1.5} />
+  </div>
+</Card>
+<style>
+  img {
+    height: 10em;
+    width: 10em;
+    object-fit: cover;
+    border-radius: 9999px;
+    box-shadow: 0px 0px 10px 0px black;
+    margin-bottom: 1em;
+  }
+
+  div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5em;
+  }
+
+  h2,
+  h3,
+  h4 {
+    margin: 0;
+  }
+</style>

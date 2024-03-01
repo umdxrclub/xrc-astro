@@ -1,0 +1,23 @@
+---
+import BigLinkButton from "../components/BigLinkButton.astro";
+import Card from "../components/Card.astro"
+---
+
+<Card color="var(--xr-cool-red)">
+  <h1>Extend your reality</h1>
+  <div id="link-buttons">
+    <BigLinkButton
+      href="https://discord.gg/6Bhv6BW72G"
+      text="Join Discord"
+      borderColor="#5865F2"
+    />
+    <BigLinkButton href="https://terplink.umd.edu/organization/xr-club" text="Join TerpLink" />
+  </div>
+</Card>
+<style>
+  #link-buttons {
+    justify-content: center;
+    display: flex;
+    gap: 1em;
+  }
+</style>

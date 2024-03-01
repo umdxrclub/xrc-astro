@@ -1,0 +1,84 @@
+---
+type Link = {
+  title: string;
+  href: string;
+};
+
+let links: Link[] = [
+  {
+    title: "About",
+    href: "/about",
+  },
+//   {
+//     title: "News",
+//     href: "/news",
+//   },
+  {
+    title: "Events",
+    href: "/events",
+  },
+  {
+    title: "Lab",
+    href: "/lab",
+  },
+//   {
+//     title: "Projects",
+//     href: "/projects",
+//   },
+];
+---
+
+<header>
+  <a href="/">XR Club at UMD</a>
+  <div id="links" class="right">
+    {links.map((l) => <a href={l.href}>{l.title}</a>)}
+  </div>
+</header>
+<style>
+  header {
+    position: absolute;
+    padding-top: .75em;
+    padding-left: 2em;
+    padding-right: 2em;
+    padding-bottom: 1em;
+    left: 0;
+    right: 0;
+    color: white;
+    height: 4em;
+    font-size: 1.25em;
+    display: flex;
+    filter: drop-shadow(0 0 0.75rem black);
+    background: linear-gradient(rgba(0,0,0,0.5), transparent);
+    z-index: 1;
+  }
+
+  header > div {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    
+  }
+
+  a {
+    text-decoration: none;
+    color:white;
+    text-transform: uppercase;
+    align-self: center;
+  }
+
+  .left {
+    justify-content: left;
+  }
+
+  .center {
+    justify-content: center;
+  }
+
+  .right {
+    justify-content: right;
+  }
+
+  #links {
+    gap: 32px;
+  }
+</style>

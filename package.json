@@ -1,0 +1,32 @@
+{
+  "name": "xrc-astro",
+  "type": "module",
+  "version": "0.0.1",
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro check && astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@astrojs/check": "^0.5.6",
+    "@astrojs/react": "^3.0.10",
+    "@mdi/js": "^7.4.47",
+    "@mdi/react": "^1.6.1",
+    "@react-three/drei": "^9.99.5",
+    "@react-three/fiber": "^8.15.16",
+    "@types/react": "^18.2.61",
+    "@types/react-dom": "^18.2.19",
+    "astro": "^4.4.6",
+    "dotenv": "^16.4.5",
+    "firebase": "^10.8.1",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-markdown": "^9.0.1",
+    "react-router-dom": "^6.22.2",
+    "react-router-hash-link": "^2.4.3",
+    "three": "^0.162.0",
+    "typescript": "^5.3.3"
+  }
+}

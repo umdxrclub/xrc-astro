@@ -1,0 +1,95 @@
+---
+import IconLinks from "./IconLinks.astro";
+import type { IconLink } from "./IconLinks.astro";
+import BigLinkButton from "./BigLinkButton.astro";
+
+const socials: IconLink[] = [
+  {
+    icon: "mdiYoutube",
+    url: "https://youtube.com",
+  },
+  {
+    icon: "mdiTwitter",
+    url: "",
+  },
+  {
+    icon: "mdiEmail",
+    url: "",
+  },
+  {
+    icon: "mdiInstagram",
+    url: "",
+  },
+  {
+    icon: "mdiLinkedin",
+    url: "",
+  },
+  {
+    icon: "mdiGithub",
+    url: "",
+  },
+  {
+    icon: "mdiSteam",
+    url: "",
+  },
+];
+---
+
+<footer>
+  <div class="footer-row">
+    <BigLinkButton
+      href="https://discord.gg/6Bhv6BW72G"
+      text="Join Discord"
+      borderColor="#5865F2"
+    />
+    <BigLinkButton
+      href="https://terplink.umd.edu/organization/xr-club"
+      text="Join TerpLink"
+    />
+  </div>
+
+  <div class="footer-row">
+    <a class="icxr" href="https://icxr.org">
+      <img src="/img/icxr.png" alt="A member of ICXR" />
+    </a>
+
+    <IconLinks links={socials} scale={1.5} />
+  </div>
+  <p>Copyright 2024 XR Club, College Park, MD</p>
+</footer>
+<style>
+  footer {
+    border-top: solid var(--xr-purple) 1px;
+    min-height: 128px;
+    padding: 16px;
+    background-color: var(--xr-background);
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    gap: 1em;
+  }
+
+  .footer-row {
+    display: flex;
+    flex-direction: row;
+    gap: 2em;
+  }
+
+  .icxr {
+    align-items: center;
+    justify-content: center;
+    height: 4em;
+    display: flex;
+  }
+
+  img {
+    object-fit: contain;
+    width: 100%;
+    height: 100%;
+  }
+
+  p {
+    font-size: 0.75em;
+  }
+</style>

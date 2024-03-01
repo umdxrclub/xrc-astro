@@ -1,0 +1,28 @@
+---
+type Props = {
+  href: string;
+  text: string;
+  borderColor?: string;
+};
+
+let { href, text, borderColor } = Astro.props;
+---
+
+<a href={href} style={{borderColor: borderColor}}>
+  {text}
+</a>
+<style>
+  a {
+    padding: 1.25em;
+    min-width: 10em;
+    text-align: center;
+    color: white;
+    text-decoration: none;
+    display: inline-block;
+    border: solid 0.3em var(--xr-red);
+    background-color: rgba(0,0,0,0.5);
+    border-radius: 9999px;
+    text-transform: uppercase;
+    backdrop-filter: blur(10px);
+  }
+</style>

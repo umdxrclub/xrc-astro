@@ -1,0 +1,11 @@
+---
+import XRCPage from "../layouts/XRCPage.astro";
+
+const thing = await fetch("https://umdxr.club/api/globals/lab/status")
+const text = await thing.text();
+---
+<XRCPage>
+  {text}
+</XRCPage>
+<style>
+</style>

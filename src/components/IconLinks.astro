@@ -1,0 +1,35 @@
+---
+import Icons from "@mdi/js";
+import MDIcon from "./MDIcon.astro";
+
+type Props = {
+  links: IconLink[],
+  scale?: number;
+};
+
+export type IconLink = {
+  url: string;
+  icon: keyof typeof Icons;
+};
+
+const { scale, links } = Astro.props;
+---
+
+<div>
+  {
+    links.map((l) => (
+      <a href={l.url}>
+        <MDIcon name={l.icon} scale={scale} />
+      </a>
+    ))
+  }
+</div>
+<style>
+    div {
+        display: flex;
+        flex-direction: row;
+        gap: 1em;
+        justify-content: center;
+        align-items: center;
+    }
+</style>
