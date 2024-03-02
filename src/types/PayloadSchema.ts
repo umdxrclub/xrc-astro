@@ -68,6 +68,7 @@ export interface Member {
   roles?: (string | Role)[] | null;
   profile?: {
     picture?: string | Media | null;
+    secondaryPicture?: string | Media | null;
     links?:
       | {
           type: 'github' | 'linkedIn' | 'website' | 'youtube' | 'email';

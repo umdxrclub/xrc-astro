@@ -1,0 +1,161 @@
+---
+type Props = {
+  event: Event;
+};
+
+import { Image } from "astro:assets";
+import type { Event } from "../types/PayloadSchema";
+import Card from "./Card.astro";
+import lab from "../../public/img/lab.jpg";
+
+const { event } = Astro.props;
+
+let dateFormatter = Intl.DateTimeFormat("en-us", {
+  dateStyle: "long",
+});
+
+let timeFormatter = Intl.DateTimeFormat("en-us", {
+  timeStyle: "short",
+});
+
+let startDate = new Date(event.startDate);
+let endDate = new Date(event.endDate);
+
+let dateStr = dateFormatter.format(startDate);
+
+let startTime = timeFormatter.format(startDate);
+let endTime = timeFormatter.format(endDate);
+
+let timeStr = `${startTime} to ${endTime}`;
+
+let irl = event.location?.irl;
+let online = event.location?.online;
+---
+
+<Card>
+  <div class="event">
+    <div class="info">
+      <h1>{event.name}</h1>
+      <h2>{dateStr}</h2>
+      <h4>{timeStr}</h4>
+      {
+        irl ? (
+          <div class="location">
+            <h4>In Person:</h4>
+            {irl}
+          </div>
+        ) : null
+      }
+      {
+        online ? (
+          <div class="location">
+            <h4>Online: </h4>
+            {online}
+          </div>
+        ) : null
+      }
+      <br />
+      <p>{event.description}</p>
+    </div>
+    <div class="img-container">
+      {
+        event.thumbnail ? (
+          <Image
+            inferSize
+            src={event.thumbnail}
+            alt={`Thumbnail for ${event.name}`}
+          />
+        ) : (
+          <Image src={lab} alt={`Thumbnail for ${event.name}`} />
+        )
+      }
+    </div>
+  </div>
+</Card>
+<style>
+  .event {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-self: start;
+    gap: 1em;
+  }
+
+  .info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2em;
+    flex: 1;
+  }
+
+  img {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+    border-radius: 1em;
+
+  }
+
+  .img-container {
+    align-self: center;
+    width: 20em;
+    overflow: hidden;
+    aspect-ratio: 16/9;
+  }
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  p {
+    margin: 0;
+    text-align: left;
+  }
+
+  h2 {
+    width: 100%;
+    text-overflow: ellipsis;
+    white-space: no-wrap;
+    overflow: hidden;
+  }
+
+  p {
+    text-overflow: ellipsis;
+    white-space: no-wrap;
+    overflow: hidden;
+  }
+
+  .location {
+    display: flex;
+    gap: 0.3em;
+  }
+
+  @media (orientation: portrait) {
+    .event {
+      flex-direction: column;
+      align-self: inherit;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      text-align: center;
+    }
+
+    .img-container {
+      width: 100%;
+    }
+
+    .info {
+      justify-content: center;
+    }
+
+    .location {
+      justify-content: center;
+    }
+  }
+</style>

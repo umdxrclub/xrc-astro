@@ -1,9 +1,10 @@
 ---
 import WelcomeBanner from "../components/WelcomeBanner.astro";
 import XRCPage from "../layouts/XRCPage.astro";
+import Card from "../components/Card.astro"
 ---
 
-<XRCPage bannerHref="/img/lab.jpg">
+<XRCPage>
   <WelcomeBanner slot="banner" />
 
   <h1>What is the XR Club?</h1>
@@ -22,13 +23,11 @@ import XRCPage from "../layouts/XRCPage.astro";
       id="video"></iframe>
     <script src="https://player.vimeo.com/api/player.js"></script>
   </div>
+  <Card>
+    
+  </Card>
 </XRCPage>
 <style>
-  h1 {
-    text-transform: uppercase;
-    color: var(--xr-cool-red);
-  }
-
   img {
     width: 20em;
     height: 20em;
@@ -42,7 +41,7 @@ import XRCPage from "../layouts/XRCPage.astro";
   }
 
   .video iframe {
-    width: 80%;
+    width: 100%;
     aspect-ratio: 16 / 9;
   }
 </style>

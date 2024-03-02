@@ -1,6 +1,6 @@
 import dotenv from "dotenv";
 import process from "process";
-import type { Website } from "../types/PayloadSchema";
+import type { Event, Website } from "../types/PayloadSchema";
 
 dotenv.config();
 
@@ -24,6 +24,13 @@ export async function fetchXRCApi(path: string) {
   let json = await res.json();
 
   return json;
+}
+
+export async function fetchEvents(): Promise<Event[]> {
+  let res = await fetchXRCApi("/events");
+  let events = res.docs as Event[]
+  
+  return events;
 }
 
 var website: Website | undefined;

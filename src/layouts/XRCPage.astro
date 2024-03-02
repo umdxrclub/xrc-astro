@@ -1,64 +1,71 @@
 ---
-import Header from "../components/Header.astro"
-import Footer from "../components/Footer.astro"
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
 import Banner from "../components/Banner.astro";
 import XRCPageContent from "../layouts/XRCPageContent.astro";
 
 interface Props {
-    bannerHref?: string
+  bannerHref?: string;
 }
 
 const { bannerHref } = Astro.props;
-
 ---
-<!DOCTYPE html>
+
+<!doctype html>
 <html lang="en">
-    <head>
-        <title>XR Club @ UMD</title>
-    </head>
-    <body>
-        <Header />
-        <main>
-            <Banner href={bannerHref ?? ""}>
-                <slot name="banner"/>
-            </Banner>
-            <XRCPageContent>
-                <slot />
-            </XRCPageContent>
-        </main>
-        <Footer />
-    </body>
+  <head>
+    <title>XR Club @ UMD</title>
+  </head>
+  <body>
+    <Header />
+    <main>
+      <Banner href={bannerHref}>
+        <slot name="banner" />
+      </Banner>
+      <XRCPageContent>
+        <slot />
+      </XRCPageContent>
+    </main>
+    <Footer />
+  </body>
 </html>
 <style is:global>
-    :root {
-        --font-primary: 'Bahnschrift', sans-serif;
-        --font-secondary: 'Lato', sans-serif;
-        --xr-red: #e61a31;
-        --xr-purple: #661556;
-        --xr-cool-red: #a52256;
-        --xr-indigo: #4d1798;
-        --xr-background: #0b040a;
-        --text-color: #ffffff;
-        --xr-gradient: linear-gradient(
-            -45deg,
-            var(--xr-red),
-            var(--xr-cool-red),
-            var(--xr-purple),
-            var(--xr-indigo)
-        );
-    }
+  :root {
+    --font-primary: "Bahnschrift", sans-serif;
+    --font-secondary: "Lato", sans-serif;
+    --xr-red: #e61a31;
+    --xr-purple: #661556;
+    --xr-cool-red: #a52256;
+    --xr-indigo: #4d1798;
+    --xr-blue: #2588ea;
+    --xr-cool-blue: #0d4f92;
+    --xr-background: #0b040a;
+    --text-color: #ffffff;
+    --xr-gradient: linear-gradient(
+      -45deg,
+      var(--xr-red),
+      var(--xr-cool-red),
+      var(--xr-purple),
+      var(--xr-indigo)
+    );
+  }
 
-    body {
-        margin: 0;
-        font-family: "Bahnschrift";
-        background-size: 3em 3em;
-        background-image:
-            radial-gradient(circle, #20071a 2px,rgba(0,0,0,0) 2px),
-            linear-gradient(var(--xr-background), var(--xr-background));
-        color: white;
-    }
+  body {
+    margin: 0;
+    font-family: "Bahnschrift";
+    background-size: 3em 3em;
+    background-image: radial-gradient(circle, #20071a 2px, rgba(0, 0, 0, 0) 2px),
+      linear-gradient(var(--xr-background), var(--xr-background));
+    color: white;
+  }
 
-    main {
-        min-height: 100vh;
-    }
+  h1 {
+    text-align: center;
+    text-transform: uppercase;
+    color: var(--xr-blue);
+  }
+
+  main {
+    min-height: 100vh;
+  }
 </style>

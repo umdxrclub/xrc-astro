@@ -1,11 +1,26 @@
 ---
 
 ---
-<div>
-    <slot />
+<div class="parent">
+    <div class="content">
+        <slot />
+    </div>
 </div>
 <style>
-    div {
-        margin: 3em;
+    .parent {
+        max-width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding-left: 6em;
+        padding-right: 6em;
+        margin-top: 2em;
+        margin-bottom: 2em;
+    }
+
+    .content {
+        width:100%;
+        max-width: 80em;
     }
 </style>

@@ -5,32 +5,32 @@ import BigLinkButton from "./BigLinkButton.astro";
 
 const socials: IconLink[] = [
   {
-    icon: "mdiYoutube",
-    url: "https://youtube.com",
-  },
-  {
-    icon: "mdiTwitter",
-    url: "",
-  },
-  {
     icon: "mdiEmail",
-    url: "",
+    url: "mailto:umd.xr.club@gmail.com",
   },
   {
     icon: "mdiInstagram",
-    url: "",
+    url: "https://www.instagram.com/umdxrclub",
   },
   {
     icon: "mdiLinkedin",
-    url: "",
+    url: "https://www.linkedin.com/groups/8981512/",
   },
   {
     icon: "mdiGithub",
-    url: "",
+    url: "https://github.com/umdxrclub",
+  },
+  {
+    icon: "mdiYoutube",
+    url: "https://youtube.com/@xrclub",
+  },
+  {
+    icon: "mdiTwitter",
+    url: "https://twitter.com/umdxrclub",
   },
   {
     icon: "mdiSteam",
-    url: "",
+    url: "https://steamcommunity.com/groups/xrclub",
   },
 ];
 ---
@@ -40,7 +40,7 @@ const socials: IconLink[] = [
     <BigLinkButton
       href="https://discord.gg/6Bhv6BW72G"
       text="Join Discord"
-      borderColor="#5865F2"
+      buttonColor="#5865F2"
     />
     <BigLinkButton
       href="https://terplink.umd.edu/organization/xr-club"
@@ -61,7 +61,7 @@ const socials: IconLink[] = [
   footer {
     border-top: solid var(--xr-purple) 1px;
     min-height: 128px;
-    padding: 16px;
+    padding: 2em;
     background-color: var(--xr-background);
     display: flex;
     justify-content: center;
@@ -91,5 +91,6 @@ const socials: IconLink[] = [
 
   p {
     font-size: 0.75em;
+    margin: 0;
   }
 </style>

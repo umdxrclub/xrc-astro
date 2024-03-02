@@ -1,8 +1,29 @@
 ---
 import XRCPage from "../layouts/XRCPage.astro";
+import EventCard from "../components/EventCard.astro";
+import { fetchEvents } from "../util/xrc-suite";
+
+let events = await fetchEvents();
+
 ---
+
 <XRCPage>
-    breh
+  <div slot="banner">
+    <h1>Event Schedule</h1>
+  </div>
+  <div class="events">
+    {events.map((e) => <EventCard event={e} />)}
+  </div>
 </XRCPage>
 <style>
-</style>
+  .events {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+  }
+  h1 {
+    color:white;
+    font-size: 6em;
+    text-shadow: black 2px 5px 20px;
+  }
+</style

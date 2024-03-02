@@ -1,34 +1,28 @@
 ---
 type Props = {
-  href: string;
+  href?: string;
   height?: number;
 };
 
 const { href } = Astro.props;
-
-const bannerClass = href ? "" : "no-img";
-const style = href ? { backgroundImage: `url(${href})` } : undefined;
+const style = { backgroundImage: `url(${href ?? "/img/lab.jpg"})` };
 ---
 
-<div class={bannerClass} style={style}>
+<div style={style}>
   <slot />
 </div>
 
 <style>
   div {
-    height: 600px;
+    height: 400px;
     width: 100%;
-    background-size: cover;
-    background-position: center;
+
     flex-direction: column;
     display: flex;
     justify-content: center;
     align-items: center;
-    /* -webkit-mask-image: linear-gradient(white 95%, transparent 100%) */
+    background-size: cover;
+    background-position: center;
     border-bottom: solid var(--xr-purple) 1px;
-  }
-
-  .no-img {
-    background-color: color-mix(in srgb, var(--xr-purple) 60%, transparent);
   }
 </style>

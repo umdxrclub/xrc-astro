@@ -15,24 +15,31 @@ var profilePicUrl: string | undefined = undefined;
 if (typeof member.profile?.picture == "object" && member.profile.picture?.url)
   profilePicUrl = xrcPath(member.profile.picture.url);
 
+var secondaryProfilePicUrl: string | undefined = undefined;
+if (
+  typeof member.profile?.secondaryPicture == "object" &&
+  member.profile.secondaryPicture?.url
+)
+  secondaryProfilePicUrl = xrcPath(member.profile.secondaryPicture.url);
+
 const links: IconLink[] = (member.profile?.links ?? []).map((l) => {
   var icon: MDIconType = "mdiWeb";
 
   switch (l.type) {
     case "email":
-      icon = "mdiEmail"
+      icon = "mdiEmail";
       break;
 
     case "github":
-      icon = "mdiGithub"
+      icon = "mdiGithub";
       break;
 
     case "linkedIn":
-      icon = "mdiLinkedin"
+      icon = "mdiLinkedin";
       break;
 
     case "youtube":
-      icon = "mdiYoutube"
+      icon = "mdiYoutube";
       break;
   }
 
@@ -44,24 +51,67 @@ const links: IconLink[] = (member.profile?.links ?? []).map((l) => {
 ---
 
 <Card>
-  <div>
-    <img src={profilePicUrl ?? "/img/xrc.png"} />
+  <div class="member">
+    <div class=`flip-img ${secondaryProfilePicUrl ? "hover" : undefined}`>
+      <div class="flip-img-inner">
+        <div class="front-img">
+          <img src={profilePicUrl ?? "/img/xrc.png"} />
+        </div>
+        <div class="back-img">
+          <img src={secondaryProfilePicUrl ?? "/img/xrc.png"} />
+        </div>
+      </div>
+    </div>
     <h2>{member.name}</h2>
-    <h4>{member.title}</h4>
+    <h3>{member.title}</h3>
     <IconLinks links={links} scale={1.5} />
   </div>
 </Card>
 <style>
   img {
+    object-fit: cover;
+    width: 10em;
+    height: 10em;
+    border-radius: 9999px;
+    transition: box-shadow 0.4s;
+    
+  }
+
+  .flip-img {
     height: 10em;
     width: 10em;
-    object-fit: cover;
-    border-radius: 9999px;
-    box-shadow: 0px 0px 10px 0px black;
+    perspective: 1000px;
     margin-bottom: 1em;
   }
 
-  div {
+  .hover .flip-img-inner {
+    transition: transform 0.4s;
+    transform-style: preserve-3d;
+  }
+
+  .hover.flip-img:hover .flip-img-inner {
+    transform: rotateY(180deg);
+  }
+
+  .hover.flip-img:hover img {
+    box-shadow: 0px 0px 40px var(--xr-blue);
+  }
+
+  .front-img,
+  .back-img {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+  }
+
+  .back-img {
+    transform: rotateY(180deg);
+  }
+
+
+  .member {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -69,9 +119,16 @@ const links: IconLink[] = (member.profile?.links ?? []).map((l) => {
     gap: 0.5em;
   }
 
+ 
+
+  h2 {
+    font-size: 1.5em;
+  }
+
   h2,
   h3,
   h4 {
+    text-align: center;
     margin: 0;
   }
 </style>

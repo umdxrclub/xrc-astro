@@ -2,27 +2,35 @@
 type Props = {
   href: string;
   text: string;
-  borderColor?: string;
+  buttonColor?: string;
 };
 
-let { href, text, borderColor } = Astro.props;
+let { href, text, buttonColor } = Astro.props;
 ---
 
-<a href={href} style={{borderColor: borderColor}}>
+<a href={href} style={{"--button-color": buttonColor}}>
   {text}
 </a>
 <style>
   a {
+    --button-color: var(--xr-red);
     padding: 1.25em;
     min-width: 10em;
     text-align: center;
     color: white;
     text-decoration: none;
     display: inline-block;
-    border: solid 0.3em var(--xr-red);
+    border: solid 0.3em var(--button-color);
     background-color: rgba(0,0,0,0.5);
     border-radius: 9999px;
     text-transform: uppercase;
     backdrop-filter: blur(10px);
+    transition: box-shadow 0.5s;
+    box-shadow: 0px 0px 25px transparent;
+  }
+
+  a:hover {
+    transition: box-shadow 0.1s;
+    box-shadow: 0px 0px 25px var(--button-color);
   }
 </style>
