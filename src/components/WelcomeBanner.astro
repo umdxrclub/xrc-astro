@@ -1,27 +1,25 @@
 ---
 import BigLinkButton from "../components/BigLinkButton.astro";
 import Card from "../components/Card.astro"
+import Group from "../layouts/Group.astro";
 ---
 
 <Card>
-  <h1>Extend your reality</h1>
-  <div id="link-buttons">
-    <BigLinkButton
-      href="https://discord.gg/6Bhv6BW72G"
-      text="Join Discord"
-      buttonColor="#5865F2"
-    />
-    <BigLinkButton href="https://terplink.umd.edu/organization/xr-club" text="Join TerpLink" />
-  </div>
+  <Group justifyContent="center" alignItems="center">
+    <h1>Extend your reality</h1>
+    <Group direction="row" alignItems="center" justifyContent="center">
+      <BigLinkButton
+        href="https://discord.gg/6Bhv6BW72G"
+        text="Join Discord"
+        buttonColor="#5865F2"
+      />
+      <BigLinkButton href="https://terplink.umd.edu/organization/xr-club" text="Join TerpLink" />
+    </Group>
+  </Group>
 </Card>
 <style>
   h1 {
     color: white;
-  }
-
-  #link-buttons {
-    justify-content: center;
-    display: flex;
-    gap: 1em;
+    margin: 0;
   }
 </style>

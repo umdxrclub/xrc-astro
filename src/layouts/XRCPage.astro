@@ -6,20 +6,23 @@ import XRCPageContent from "../layouts/XRCPageContent.astro";
 
 interface Props {
   bannerHref?: string;
+  bannerText?: string;
 }
 
-const { bannerHref } = Astro.props;
+const { bannerHref, bannerText } = Astro.props;
 ---
 
 <!doctype html>
 <html lang="en">
   <head>
     <title>XR Club @ UMD</title>
+    <meta name="theme-color" content="#0b040a" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   </head>
   <body>
     <Header />
     <main>
-      <Banner href={bannerHref}>
+      <Banner href={bannerHref} text={bannerText}>
         <slot name="banner" />
       </Banner>
       <XRCPageContent>
@@ -30,6 +33,11 @@ const { bannerHref } = Astro.props;
   </body>
 </html>
 <style is:global>
+  @font-face {
+    font-family: "Bahnschrift";
+    src: url("/fonts/bahnschrift.ttf") format("truetype");
+  }
+
   :root {
     --font-primary: "Bahnschrift", sans-serif;
     --font-secondary: "Lato", sans-serif;
@@ -39,7 +47,7 @@ const { bannerHref } = Astro.props;
     --xr-indigo: #4d1798;
     --xr-blue: #2588ea;
     --xr-cool-blue: #0d4f92;
-    --xr-background: #0b040a;
+
     --text-color: #ffffff;
     --xr-gradient: linear-gradient(
       -45deg,
@@ -48,21 +56,34 @@ const { bannerHref } = Astro.props;
       var(--xr-purple),
       var(--xr-indigo)
     );
+    --xr-primary: var(--xr-blue);
+    --xr-secondary:  var(--xr-purple);
+    --xr-background: color-mix(in srgb, var(--xr-secondary) 10%, black);
   }
 
   body {
     margin: 0;
     font-family: "Bahnschrift";
-    background-size: 3em 3em;
-    background-image: radial-gradient(circle, #20071a 2px, rgba(0, 0, 0, 0) 2px),
+    background-size: 3rem 3rem;
+    background-image: radial-gradient(
+        circle,
+        color-mix(in srgb, var(--xr-secondary) 25%, black) 2px,
+        rgba(0, 0, 0, 0) 2px
+      ),
       linear-gradient(var(--xr-background), var(--xr-background));
     color: white;
+    box-sizing: border-box;
+  }
+  *,
+  *:before,
+  *:after {
+    box-sizing: inherit;
   }
 
   h1 {
     text-align: center;
     text-transform: uppercase;
-    color: var(--xr-blue);
+    color: var(--xr-primary);
   }
 
   main {

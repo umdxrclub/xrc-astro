@@ -2,28 +2,16 @@
 import XRCPage from "../layouts/XRCPage.astro";
 import EventCard from "../components/EventCard.astro";
 import { fetchEvents } from "../util/xrc-suite";
+import Group from "../layouts/Group.astro";
 
 let events = await fetchEvents();
 
 ---
 
-<XRCPage>
-  <div slot="banner">
-    <h1>Event Schedule</h1>
-  </div>
-  <div class="events">
+<XRCPage bannerText="Events">
+  <Group>
     {events.map((e) => <EventCard event={e} />)}
-  </div>
+  </Group>
 </XRCPage>
 <style>
-  .events {
-    display: flex;
-    flex-direction: column;
-    gap: 1em;
-  }
-  h1 {
-    color:white;
-    font-size: 6em;
-    text-shadow: black 2px 5px 20px;
-  }
-</style
+</style>

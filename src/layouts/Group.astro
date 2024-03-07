@@ -1,0 +1,55 @@
+---
+import type { CSSProperties } from "react";
+
+type Props = {
+  gap?: CSSProperties["gap"];
+  direction?: CSSProperties["flexDirection"];
+  justifyContent?: CSSProperties["justifyContent"];
+  alignItems?: CSSProperties["alignItems"];
+  noCollapse?: boolean;
+  flex?: boolean | number;
+  class?: string;
+};
+
+const {
+  gap,
+  justifyContent,
+  alignItems,
+  direction,
+  noCollapse,
+  class: cssClass,
+  flex,
+} = Astro.props;
+
+let groupClasses: (string | undefined)[] = [
+  "group",
+  noCollapse ? undefined : "group-collapse",
+  cssClass,
+];
+let groupClass = groupClasses.filter((c) => c).join(" ");
+
+let divStyle: astroHTML.JSX.CSSProperties = {
+  gap: gap,
+  flexDirection: direction,
+  justifyContent: justifyContent,
+  alignItems: alignItems,
+  flex: typeof flex == "boolean" ? (flex ? 1 : undefined) : flex,
+};
+---
+
+<div class={groupClass} style={divStyle}>
+  <slot />
+</div>
+<style>
+  .group {
+    display: flex;
+    gap: 1em;
+    flex-direction: column;
+  }
+
+  @media (orientation: portrait) {
+    .group-collapse {
+      flex-direction: column !important;
+    }
+  }
+</style>

@@ -1,28 +1,46 @@
 ---
+import { getImage } from 'astro:assets';
+import lab from "../assets/img/lab.jpg";
+import Group from '../layouts/Group.astro';
+
 type Props = {
   href?: string;
-  height?: number;
+  text?: string;
 };
 
-const { href } = Astro.props;
-const style = { backgroundImage: `url(${href ?? "/img/lab.jpg"})` };
+const { href, text } = Astro.props;
+
+let imgUrl = href ? href : (await getImage({src: lab, format: "webp"})).src
+const style = { backgroundImage: `url(${imgUrl})` };
 ---
 
 <div style={style}>
-  <slot />
+  <Group>
+    {text ? <h1>{text}</h1> : <slot />}
+  </Group>
 </div>
 
 <style>
   div {
-    height: 400px;
-    width: 100%;
-
-    flex-direction: column;
+    box-sizing: border-box;
     display: flex;
+    min-height: 25rem;
+    max-width: 100%;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    padding-bottom: 1rem;
+    padding-top: 7rem;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     background-size: cover;
     background-position: center;
-    border-bottom: solid var(--xr-purple) 1px;
+    border-bottom: solid var(--xr-secondary) 1px;
+  }
+
+  h1 {
+    color:white;
+    font-size: 6em;
+    text-shadow: black 2px 5px 20px;
   }
 </style>

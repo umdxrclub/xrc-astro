@@ -1,47 +1,63 @@
 ---
 import WelcomeBanner from "../components/WelcomeBanner.astro";
 import XRCPage from "../layouts/XRCPage.astro";
-import Card from "../components/Card.astro"
+import Card from "../components/Card.astro";
+import headset from "../assets/img/headset.png";
+import Group from "../layouts/Group.astro"
+import { Image } from "astro:assets";
 ---
 
 <XRCPage>
   <WelcomeBanner slot="banner" />
-
-  <h1>What is the XR Club?</h1>
-  <p>
-    XR Club is a student organization at the University of Maryland, College
-    Park that focuses on immersive technologies, like virtual reality (VR),
-    augmented reality (AR), and mixed reality (MR). We provide students with
-    resources and opportunities to explore XR through hands-on tutorials,
-    projects, hackathons, game nights, open lab hours, mentor office hours, and
-    more!
-  </p>
-  <div class="video">
-    <iframe
-      title="XR Terrestrial Video"
-      src="https://player.vimeo.com/video/379079878?title=0&portrait=0"
-      id="video"></iframe>
-    <script src="https://player.vimeo.com/api/player.js"></script>
+  <Group>
+    <h1>What is the XR Club?</h1>
+    <Group direction="row"  justifyContent="center">
+      <p>
+        XR Club is a student organization at the University of Maryland, College
+        Park that focuses on immersive technologies, like virtual reality (VR),
+        augmented reality (AR), and mixed reality (MR). We provide students with
+        resources and opportunities to explore XR through hands-on tutorials,
+        projects, hackathons, game nights, open lab hours, mentor office hours,
+        and more!
+      </p>
+      <Card>
+        <Image src={headset} alt="VR Headset" class="index-img"/>
+      </Card>
+    </Group>
+    <div class="video">
+      <iframe
+        title="XR Terrestrial Video"
+        src="https://player.vimeo.com/video/379079878?title=0&portrait=0"
+        id="video"></iframe>
+      <script src="https://player.vimeo.com/api/player.js"></script>
+    </div>
   </div>
-  <Card>
-    
-  </Card>
+
+  
 </XRCPage>
+
 <style>
   img {
-    width: 20em;
-    height: 20em;
     object-fit: contain;
+  }
+
+  .index-img {
+    max-width: 10rem;
+    height: auto;
   }
 
   .video {
     display: flex;
     align-items: center;
     justify-content: center;
+    width: 100%;
   }
 
   .video iframe {
     width: 100%;
     aspect-ratio: 16 / 9;
+  }
+  p {
+    line-height: 1.5em;
   }
 </style>

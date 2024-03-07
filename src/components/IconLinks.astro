@@ -1,9 +1,10 @@
 ---
 import Icons from "@mdi/js";
 import MDIcon from "./MDIcon.astro";
+import Group from "../layouts/Group.astro";
 
 type Props = {
-  links: IconLink[],
+  links: IconLink[];
   scale?: number;
 };
 
@@ -15,7 +16,7 @@ export type IconLink = {
 const { scale, links } = Astro.props;
 ---
 
-<div>
+<Group noCollapse direction="row" justifyContent="center" alignItems="center">
   {
     links.map((l) => (
       <a href={l.url}>
@@ -23,13 +24,5 @@ const { scale, links } = Astro.props;
       </a>
     ))
   }
-</div>
-<style>
-    div {
-        display: flex;
-        flex-direction: row;
-        gap: 1em;
-        justify-content: center;
-        align-items: center;
-    }
-</style>
+</Group>
+<style></style>

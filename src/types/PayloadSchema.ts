@@ -735,6 +735,12 @@ export interface Website {
         id?: string | null;
       }[]
     | null;
+  legacyMembers?:
+    | {
+        member: string | Member;
+        id?: string | null;
+      }[]
+    | null;
   updatedAt?: string | null;
   createdAt?: string | null;
 }

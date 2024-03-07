@@ -3,27 +3,90 @@ import MemberCard from "../components/MemberCard.astro";
 import XRCPage from "../layouts/XRCPage.astro";
 import { fetchWebsite } from "../util/xrc-suite";
 import type { Member } from "../types/PayloadSchema";
+import Card from "../components/Card.astro";
+import Group from "../layouts/Group.astro";
+import { Image } from "astro:assets";
+import Teams from "../assets/img/teams.png";
 
 let website = await fetchWebsite();
 const members = website.members?.map((m) => m.member as Member) ?? [];
+const legacyMembers =
+  website.legacyMembers
+    ?.map((m) => m.member as Member)
+    .sort((a, b) => a.name.localeCompare(b.name)) ?? [];
 ---
 
 <XRCPage>
-  <h1>Leadership</h1>
-  <div class="leadership">
-    {members.map((m) => <MemberCard member={m} />)}
-  </div>
+  <Group>
+    <h1>Mission Statement</h1>
+    <p>
+      Our mission is to foster a community around virtual and augmented reality
+      on campus by providing technologies, mentorship, and specialized
+      hackathons. To capture these goals, XR Club strives to supply the
+      resources for students to develop, the specialized mentorship to gain
+      knowledge, and the supportive culture to produce an innovative mindset.
+      We, as aspiring developers, creatives, artists, entrepreneurs, engineers,
+      and scientists, collaborate on XR Projects, which includes Augmented,
+      Virtual, and Mixed Reality, as well as research XR technology. We are
+      passionate about all things XR and welcome new members with unprecedented
+      access to XR development equipment and expertise.
+    </p>
+    <h1>Teams</h1>
+    <!-- <Card color="var(--xr-red)">
+      <Group flex alignItems="left">
+        <h2>Admin</h2>
+      </Group>
+    </Card>
+    <Card color="var(--xr-blue)">
+      <h2>Lab</h2>
+    </Card>
+    <Card color="var(--xr-purple)">
+      <h2>Projects</h2>
+    </Card>
+    <Card color="green">
+      <h2>Events</h2>
+    </Card>
+    <Card color="var(--xr-indigo)">
+      <h2>Media</h2>
+    </Card>
+    <Card color="orange">
+      <h2>Outreach</h2>
+    </Card> -->
+
+    <Image src={Teams} alt="An overview of the different teams of the XR Club" />
+
+    <h1>History</h1>
+    Coming soon!
+
+    <h1>Leadership</h1>
+    <div class="leadership">
+      {members.map((m) => <MemberCard member={m} />)}
+    </div>
+
+    {
+      legacyMembers.length > 0 ? (
+        <>
+          <h1>Past Leadership</h1>
+          <div class="leadership">
+            {legacyMembers.map((m) => (
+              <MemberCard member={m} />
+            ))}
+          </div>
+        </>
+      ) : null
+    }
+  </Group>
 </XRCPage>
 
 <style>
   .leadership {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  grid-template-rows: 1fr;
-    grid-gap: 2em;
+    grid-template-rows: 1fr;
+    grid-gap: 2rem;
   }
-  img {
-    width: 100px;
-    height: 100px;
+
+  h2 {
+    margin: 0;
   }
 </style>

@@ -4,6 +4,9 @@ import type { Media, Member } from "../types/PayloadSchema";
 import type { MDIconType } from "./MDIcon.astro";
 import { xrcPath } from "../util/xrc-suite";
 import IconLinks, { type IconLink } from "./IconLinks.astro";
+import { Image } from "astro:assets";
+import DefaultPfp from "../assets/img/pfp.png";
+import Group from "../layouts/Group.astro";
 
 type Props = {
   member: Member;
@@ -51,35 +54,55 @@ const links: IconLink[] = (member.profile?.links ?? []).map((l) => {
 ---
 
 <Card>
-  <div class="member">
+  <Group gap="0.5em" alignItems="center">
     <div class=`flip-img ${secondaryProfilePicUrl ? "hover" : undefined}`>
       <div class="flip-img-inner">
         <div class="front-img">
-          <img src={profilePicUrl ?? "/img/xrc.png"} />
+          {
+            profilePicUrl ? (
+              <Image
+                inferSize
+                src={profilePicUrl}
+                alt={`Profile picture for ${member.name}`}
+              />
+            ) : (<Image
+                src={DefaultPfp}
+                alt={`Secondary profile picture for ${member.name}`}
+              /></div>
+            )
+          }
         </div>
         <div class="back-img">
-          <img src={secondaryProfilePicUrl ?? "/img/xrc.png"} />
+          {
+            secondaryProfilePicUrl ? (
+              <Image
+                inferSize
+                src={secondaryProfilePicUrl}
+                alt={`Secondary profile picture for ${member.name}`}
+              />
+            ) : null
+          }
         </div>
       </div>
     </div>
     <h2>{member.name}</h2>
     <h3>{member.title}</h3>
     <IconLinks links={links} scale={1.5} />
-  </div>
+  </Group>
 </Card>
 <style>
   img {
     object-fit: cover;
-    width: 10em;
-    height: 10em;
+    width: 10rem;
+    height: 10rem;
     border-radius: 9999px;
     transition: box-shadow 0.4s;
-    
+    border: solid 0.25rem var(--xr-primary);
   }
 
   .flip-img {
-    height: 10em;
-    width: 10em;
+    height: 10rem;
+    width: 10rem;
     perspective: 1000px;
     margin-bottom: 1em;
   }
@@ -94,7 +117,7 @@ const links: IconLink[] = (member.profile?.links ?? []).map((l) => {
   }
 
   .hover.flip-img:hover img {
-    box-shadow: 0px 0px 40px var(--xr-blue);
+    box-shadow: 0px 0px 40px var(--xr-primary);
   }
 
   .front-img,
@@ -109,17 +132,6 @@ const links: IconLink[] = (member.profile?.links ?? []).map((l) => {
   .back-img {
     transform: rotateY(180deg);
   }
-
-
-  .member {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 0.5em;
-  }
-
- 
 
   h2 {
     font-size: 1.5em;

@@ -13,9 +13,10 @@ let { href, text, buttonColor } = Astro.props;
 </a>
 <style>
   a {
+    box-sizing: content-box;
     --button-color: var(--xr-red);
-    padding: 1.25em;
-    min-width: 10em;
+    padding: 1.25rem;
+    min-width: 10rem;
     text-align: center;
     color: white;
     text-decoration: none;

@@ -2,6 +2,9 @@
 import IconLinks from "./IconLinks.astro";
 import type { IconLink } from "./IconLinks.astro";
 import BigLinkButton from "./BigLinkButton.astro";
+import ICXR from "../assets/img/icxr.png";
+import { Image } from "astro:assets";
+import Group from "../layouts/Group.astro";
 
 const socials: IconLink[] = [
   {
@@ -36,50 +39,45 @@ const socials: IconLink[] = [
 ---
 
 <footer>
-  <div class="footer-row">
-    <BigLinkButton
-      href="https://discord.gg/6Bhv6BW72G"
-      text="Join Discord"
-      buttonColor="#5865F2"
-    />
-    <BigLinkButton
-      href="https://terplink.umd.edu/organization/xr-club"
-      text="Join TerpLink"
-    />
-  </div>
+  <Group justifyContent="center">
+    <Group direction="row" justifyContent="center">
+      <BigLinkButton
+        href="https://discord.gg/6Bhv6BW72G"
+        text="Join Discord"
+        buttonColor="#5865F2"
+      />
+      <BigLinkButton
+        href="https://terplink.umd.edu/organization/xr-club"
+        text="Join TerpLink"
+      />
+    </Group>
 
-  <div class="footer-row">
-    <a class="icxr" href="https://icxr.org">
-      <img src="/img/icxr.png" alt="A member of ICXR" />
-    </a>
-
-    <IconLinks links={socials} scale={1.5} />
-  </div>
-  <p>Copyright 2024 XR Club, College Park, MD</p>
+    <Group direction="row">
+      <a class="icxr" href="https://icxr.org">
+        <Image src={ICXR} alt="The XR Clbu is a member of ICXR" />
+      </a>
+      <IconLinks links={socials} scale={1.5} />
+    </Group>
+    <p>Copyright 2024 XR Club, College Park, MD</p>
+    <p>Hecho con amor <3 </p>
+  </Group>
 </footer>
 <style>
   footer {
-    border-top: solid var(--xr-purple) 1px;
+    border-top: solid var(--xr-secondary) 1px;
     min-height: 128px;
-    padding: 2em;
+    padding: 2rem;
     background-color: var(--xr-background);
     display: flex;
     justify-content: center;
     flex-direction: column;
     align-items: center;
-    gap: 1em;
+    gap: 1rem;
   }
-
-  .footer-row {
-    display: flex;
-    flex-direction: row;
-    gap: 2em;
-  }
-
   .icxr {
     align-items: center;
     justify-content: center;
-    height: 4em;
+    height: 4rem;
     display: flex;
   }
 
@@ -92,5 +90,6 @@ const socials: IconLink[] = [
   p {
     font-size: 0.75em;
     margin: 0;
+    text-align: center;
   }
 </style>
