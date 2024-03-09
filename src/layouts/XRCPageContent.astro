@@ -1,28 +1,34 @@
 ---
 
 ---
+
 <div class="parent">
-    <div class="content">
-        <slot />
-    </div>
+  <div class="content">
+    <slot />
+  </div>
 </div>
 <style>
-    .parent {
-        max-width: 100%;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        overflow: hidden;
-        padding-left: 1rem;
-        padding-right: 1rem;
-        margin-top: 2rem;
-        margin-bottom: 2rem;
-    }
+  .parent {
+    max-width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+  }
 
-    .content {
-        width:100%;
-        max-width: 60rem;
-        font-size: 1.2rem;
+  .content {
+    width: 100%;
+    max-width: 60rem;
+    font-size: 1.2rem;
+  }
+</style>
+<style is:inline>
+    .content p {
+        line-height: 1.5em;
     }
 </style>

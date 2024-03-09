@@ -1,17 +1,18 @@
 ---
+import Working from "../assets/img/working.jpg";
+import Quest from "../assets/img/headset.png";
+import ImageCard from "../components/ImageCard.astro";
+import InfoCard from "../components/InfoCard.astro";
 import WelcomeBanner from "../components/WelcomeBanner.astro";
+import Group from "../layouts/Group.astro";
 import XRCPage from "../layouts/XRCPage.astro";
-import Card from "../components/Card.astro";
-import headset from "../assets/img/headset.png";
-import Group from "../layouts/Group.astro"
-import { Image } from "astro:assets";
 ---
 
 <XRCPage>
   <WelcomeBanner slot="banner" />
   <Group>
     <h1>What is the XR Club?</h1>
-    <Group direction="row"  justifyContent="center">
+    <Group direction="row" justifyContent="center" alignItems="center">
       <p>
         XR Club is a student organization at the University of Maryland, College
         Park that focuses on immersive technologies, like virtual reality (VR),
@@ -20,10 +21,27 @@ import { Image } from "astro:assets";
         projects, hackathons, game nights, open lab hours, mentor office hours,
         and more!
       </p>
-      <Card>
-        <Image src={headset} alt="VR Headset" class="index-img"/>
-      </Card>
     </Group>
+    <ImageCard padding={"10em"} objectFit={"contain"} src={Quest} alt="Image of people in the "/>
+    <h1>What does XR Club do?</h1>
+    <Group direction="row">
+      <InfoCard
+        icon={"mdiBook"}
+        title="Workshops"
+        description={"Learn about XR technologies and techniques such as AR/VR development, 3D modeling, Unity, and Oculus from fellow XR Club members."}
+      />
+      <InfoCard
+        icon={"mdiController"}
+        title="Gaming"
+        description={"Gain hands-on experience with XR equipment and meet other XR Club members while challenging them to immersive games."}
+      />
+      <InfoCard
+        icon={"mdiCodeTags"}
+        title="Projects"
+        description={"Collaborate with peers to develop personal projects, build immersive installations, and compete in external XR challenges."}
+      />
+    </Group>
+    <h1>(Old) Video</h1>
     <div class="video">
       <iframe
         title="XR Terrestrial Video"
@@ -31,19 +49,12 @@ import { Image } from "astro:assets";
         id="video"></iframe>
       <script src="https://player.vimeo.com/api/player.js"></script>
     </div>
-  </div>
-
-  
+  </Group>
 </XRCPage>
 
 <style>
   img {
     object-fit: contain;
-  }
-
-  .index-img {
-    max-width: 10rem;
-    height: auto;
   }
 
   .video {

@@ -1,0 +1,31 @@
+---
+import Card from "./Card.astro";
+
+import { Image } from "astro:assets";
+
+type Props = (typeof Image)["arguments"] & {
+  objectFit?: astroHTML.JSX.CSSProperties["object-fit"]
+  padding?: astroHTML.JSX.CSSProperties["padding"]
+};
+
+const props = Astro.props;
+const { objectFit, padding } = props;
+---
+
+<Card flex padding={0}>
+  <div style={{padding: padding}}>
+    <Image {...props} style={{objectFit: objectFit ?? "cover"}} />
+  </div>
+</Card>
+
+
+<style>
+  div {
+    aspect-ratio: 16/9;
+  }
+  img {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+</style>
