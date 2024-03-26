@@ -9,6 +9,7 @@
 export interface Config {
   collections: {
     admins: Admin;
+    articles: Article;
     members: Member;
     devices: Device;
     heartbeats: Heartbeat;
@@ -56,6 +57,28 @@ export interface Admin {
   loginAttempts?: number | null;
   lockUntil?: string | null;
   password?: string | null;
+}
+export interface Article {
+  id: string;
+  title: string;
+  authors?: (string | Member)[] | null;
+  content?: {
+    root: {
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      type: string;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  updatedAt: string;
+  createdAt: string;
 }
 export interface Member {
   id: string;

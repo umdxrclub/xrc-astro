@@ -1,4 +1,7 @@
 ---
+import Group from "../layouts/Group.astro";
+import MDIcon from "./MDIcon.astro";
+
 type Link = {
   title: string;
   href: string;
@@ -9,10 +12,10 @@ let links: Link[] = [
     title: "About",
     href: "/about",
   },
-//   {
-//     title: "News",
-//     href: "/news",
-//   },
+  //   {
+  //     title: "News",
+  //     href: "/news",
+  //   },
   {
     title: "Events",
     href: "/events",
@@ -21,18 +24,22 @@ let links: Link[] = [
     title: "Lab",
     href: "/lab",
   },
-//   {
-//     title: "Projects",
-//     href: "/projects",
-//   },
+  //   {
+  //     title: "Projects",
+  //     href: "/projects",
+  //   },
 ];
 ---
 
 <header>
   <a href="/">XR Club at UMD</a>
-  <div id="links" class="right">
+  <input id="menu-btn" type="checkbox" />
+  <label for="menu-btn">
+    <MDIcon name="mdiMenu" />
+  </label>
+  <nav>
     {links.map((l) => <a href={l.href}>{l.title}</a>)}
-  </div>
+  </nav>
 </header>
 <style>
   header {
@@ -42,41 +49,60 @@ let links: Link[] = [
     left: 0;
     right: 0;
     color: white;
-    height: 6rem;
+    padding-top: 2rem;
     font-size: 1.25em;
     display: flex;
     filter: drop-shadow(0 0 0.75rem black);
-    background: linear-gradient(rgba(0,0,0,0.5), transparent);
+    background: linear-gradient(rgba(0, 0, 0, 0.5), transparent);
     z-index: 1;
     box-sizing: border-box;
-  }
-
-  header > div {
-    flex: 1;
-    display: flex;
-    align-items: center;
+    flex-wrap: wrap;
   }
 
   a {
     text-decoration: none;
-    color:white;
+    color: white;
     text-transform: uppercase;
-    align-self: center;
   }
 
-  .left {
-    justify-content: left;
-  }
-
-  .center {
-    justify-content: center;
-  }
-
-  .right {
+  nav {
+    display: flex;
+    gap: 2rem;
     justify-content: right;
+    align-items: center;
+    flex: 1;
+    transition: max-height 0.25s ease-in-out;
+    overflow: hidden;
   }
 
-  #links {
-    gap: 32px;
+  label {
+    display: none;
+    justify-content: right;
+    align-items: center;
+    flex: 1;
+  }
+
+  input {
+    appearance: none;
+  }
+
+  @media (orientation: portrait) {
+    nav {
+      flex-direction: column;
+      flex-basis: 100%;
+      padding-top: 2rem;
+      max-height: 0;
+      
+      align-items: flex-start;
+    }
+
+    label {
+      display: flex;
+
+    }
+
+    input:checked ~ nav {
+      max-height: 20rem;
+    }
   }
 </style>
