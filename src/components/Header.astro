@@ -1,6 +1,7 @@
 ---
 import Group from "../layouts/Group.astro";
 import MDIcon from "./MDIcon.astro";
+import process from "process"
 
 type Link = {
   title: string;
@@ -12,10 +13,10 @@ let links: Link[] = [
     title: "About",
     href: "/about",
   },
-  //   {
-  //     title: "News",
-  //     href: "/news",
-  //   },
+  // {
+  //   title: "News",
+  //   href: "/news",
+  // },
   {
     title: "Events",
     href: "/events",
@@ -24,11 +25,13 @@ let links: Link[] = [
     title: "Lab",
     href: "/lab",
   },
-  //   {
-  //     title: "Projects",
-  //     href: "/projects",
-  //   },
+  // {
+  //   title: "Projects",
+  //   href: "/projects",
+  // },
 ];
+
+let base = process.env.SITE_BASE ? "/" + process.env.SITE_BASE : ""
 ---
 
 <header>
@@ -38,25 +41,38 @@ let links: Link[] = [
     <MDIcon name="mdiMenu" />
   </label>
   <nav>
-    {links.map((l) => <a href={l.href}>{l.title}</a>)}
+    {links.map((l) => <a href={base + l.href}>{l.title}</a>)}
   </nav>
 </header>
-<style>
+<style define:vars={{ numLinks: links.length }}>
   header {
+    --blur-width: 4rem;
+    --blur-gap: 1rem;
+    --blur-color: rgba(0, 0, 0, 0.5);
+    --nav-open-time: 0.25s;
+
     position: absolute;
+    box-sizing: border-box;
+    padding-top: 2rem;
     padding-left: 2rem;
     padding-right: 2rem;
     left: 0;
     right: 0;
+    z-index: 1;
     color: white;
-    padding-top: 2rem;
     font-size: 1.25em;
     display: flex;
-    filter: drop-shadow(0 0 0.75rem black);
-    background: linear-gradient(rgba(0, 0, 0, 0.5), transparent);
-    z-index: 1;
-    box-sizing: border-box;
     flex-wrap: wrap;
+    background: linear-gradient(
+      var(--blur-color) 0%,
+      var(--blur-color) calc(100% - var(--blur-width)),
+      transparent 100%
+    );
+    padding-bottom: calc(var(--blur-gap) + var(--blur-width));
+  }
+
+  header > * {
+    z-index: 3;
   }
 
   a {
@@ -71,7 +87,7 @@ let links: Link[] = [
     justify-content: right;
     align-items: center;
     flex: 1;
-    transition: max-height 0.25s ease-in-out;
+    transition: max-height var(--nav-open-time) ease-in-out;
     overflow: hidden;
   }
 
@@ -80,6 +96,7 @@ let links: Link[] = [
     justify-content: right;
     align-items: center;
     flex: 1;
+    margin-top: 0;
   }
 
   input {
@@ -87,22 +104,43 @@ let links: Link[] = [
   }
 
   @media (orientation: portrait) {
+    header::after {
+      transition: opacity var(--nav-open-time) ease-in-out;
+      opacity: 0;
+      z-index: 2;
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(
+        black 0%,
+        black calc(100% - var(--blur-width)),
+        transparent 100%
+      );
+      pointer-events: none;
+    }
+
+    header:has(> input:checked)::after {
+      opacity: 0.9;
+    }
+
     nav {
       flex-direction: column;
       flex-basis: 100%;
       padding-top: 2rem;
-      max-height: 0;
-      
+      min-height: 2rem;
+      max-height: 2rem;
       align-items: flex-start;
     }
 
     label {
       display: flex;
-
     }
 
     input:checked ~ nav {
-      max-height: 20rem;
+      max-height: calc(var(--numLinks) * 3.5rem);
     }
   }
 </style>

@@ -3,13 +3,15 @@ import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import Banner from "../components/Banner.astro";
 import XRCPageContent from "../layouts/XRCPageContent.astro";
+import Firebase from "../components/Firebase.astro";
 
 interface Props {
   bannerHref?: string;
   bannerText?: string;
+  bannerNoTint?: boolean;
 }
 
-const { bannerHref, bannerText } = Astro.props;
+const { bannerHref, bannerText, bannerNoTint } = Astro.props;
 ---
 
 <!doctype html>
@@ -22,7 +24,7 @@ const { bannerHref, bannerText } = Astro.props;
   <body>
     <Header />
     <main>
-      <Banner href={bannerHref} text={bannerText}>
+      <Banner href={bannerHref} text={bannerText} noTint={bannerNoTint} >
         <slot name="banner" />
       </Banner>
       <XRCPageContent>
@@ -30,12 +32,15 @@ const { bannerHref, bannerText } = Astro.props;
       </XRCPageContent>
     </main>
     <Footer />
+    <Firebase />
   </body>
 </html>
 <style is:global>
   @font-face {
     font-family: "Bahnschrift";
     src: url("/fonts/bahnschrift.ttf") format("truetype");
+    font-weight: 600;
+    font-style: normal;
   }
 
   :root {
@@ -47,6 +52,14 @@ const { bannerHref, bannerText } = Astro.props;
     --xr-indigo: #4d1798;
     --xr-blue: #2588ea;
     --xr-cool-blue: #0d4f92;
+
+    --xr-admin: var(--xr-red);
+    --xr-lab: var(--xr-blue);
+    --xr-events: #1fa239;
+    --xr-outreach: #e3ad19;
+    --xr-media: var(--xr-purple);
+    --xr-projects: var(--xr-cool-red);
+
 
     --text-color: #ffffff;
     --xr-gradient: linear-gradient(
@@ -78,6 +91,11 @@ const { bannerHref, bannerText } = Astro.props;
   *:before,
   *:after {
     box-sizing: inherit;
+  }
+
+  h1,h2,h3,h4,h5,h6,p {
+    margin: 0;
+    padding: 0;
   }
 
   h1 {

@@ -1,0 +1,38 @@
+---
+import Card from "../Card.astro";
+import Group from "../../layouts/Group.astro";
+import MDIcon, { type MDIconType } from "../MDIcon.astro";
+
+type Props = {
+  title: string;
+  description?: string;
+  icon?: MDIconType;
+  color?: string;
+};
+
+const { title, description, icon, color } = Astro.props;
+---
+
+<Card flex color={color}>
+  <Group class="info-card-content" gap="0.75em" alignItems="center">
+    {icon ? <MDIcon name={icon} scale={3} /> : null}
+    <h2>{title}</h2>
+    <p>
+      {description}
+      <slot />
+    </p>
+
+  </Group>
+</Card>
+<style>
+
+  h2,
+  p {
+    margin: 0;
+    text-align: center;
+  }
+
+  .info-card-content {
+    text-align: center;
+  }
+</style>

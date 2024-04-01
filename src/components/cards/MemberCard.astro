@@ -1,12 +1,12 @@
 ---
-import Card from "../components/Card.astro";
-import type { Media, Member } from "../types/PayloadSchema";
-import type { MDIconType } from "./MDIcon.astro";
-import { xrcPath } from "../util/xrc-suite";
-import IconLinks, { type IconLink } from "./IconLinks.astro";
+import Card from "../Card.astro";
+import type { Media, Member } from "../../types/PayloadSchema";
+import type { MDIconType } from "../MDIcon.astro";
+import { xrcPath } from "../../util/xrc-suite";
+import IconLinks, { type IconLink } from "../IconLinks.astro";
 import { Image } from "astro:assets";
-import DefaultPfp from "../assets/img/pfp.png";
-import Group from "../layouts/Group.astro";
+import DefaultPfp from "../../assets/img/pfp.png";
+import Group from "../../layouts/Group.astro";
 
 type Props = {
   member: Member;
@@ -141,6 +141,5 @@ const links: IconLink[] = (member.profile?.links ?? []).map((l) => {
   h3,
   h4 {
     text-align: center;
-    margin: 0;
   }
 </style>

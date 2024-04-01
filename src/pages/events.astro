@@ -1,14 +1,17 @@
 ---
 import XRCPage from "../layouts/XRCPage.astro";
-import EventCard from "../components/EventCard.astro";
+import EventCard from "../components/cards/EventCard.astro";
 import { fetchEvents } from "../util/xrc-suite";
 import Group from "../layouts/Group.astro";
+import { getImage } from "astro:assets";
+import EventsBanner from "../assets/img/events_crop.jpg"
 
 let events = await fetchEvents();
+let imageHref = (await getImage({src: EventsBanner})).src
 
 ---
 
-<XRCPage bannerText="Events">
+<XRCPage bannerHref={imageHref} bannerText="Events">
   <Group>
     {events.map((e) => <EventCard event={e} />)}
   </Group>

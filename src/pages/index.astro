@@ -1,29 +1,26 @@
 ---
-import Working from "../assets/img/working.jpg";
-import Quest from "../assets/img/headset.png";
-import ImageCard from "../components/ImageCard.astro";
-import InfoCard from "../components/InfoCard.astro";
+import BS from "../assets/img/bs.jpg";
+import ImageCard from "../components/cards/ImageCard.astro";
+import InfoCard from "../components/cards/InfoCard.astro";
 import WelcomeBanner from "../components/WelcomeBanner.astro";
 import Group from "../layouts/Group.astro";
 import XRCPage from "../layouts/XRCPage.astro";
 ---
 
-<XRCPage>
+<XRCPage bannerNoTint>
   <WelcomeBanner slot="banner" />
-  <Group>
+  <Group gap="2rem">
     <h1>What is the XR Club?</h1>
-    <Group direction="row" justifyContent="center" alignItems="center">
-      <p>
-        XR Club is a student organization at the University of Maryland, College
-        Park that focuses on immersive technologies, like virtual reality (VR),
-        augmented reality (AR), and mixed reality (MR). We provide students with
-        resources and opportunities to explore XR through hands-on tutorials,
-        projects, hackathons, game nights, open lab hours, mentor office hours,
-        and more!
-      </p>
-    </Group>
-    <ImageCard padding={"10em"} objectFit={"contain"} src={Quest} alt="Image of people in the "/>
-    <h1>What does XR Club do?</h1>
+    <p>
+      XR Club is a student organization at the University of Maryland, College
+      Park that focuses on immersive technologies, like virtual reality (VR),
+      augmented reality (AR), and mixed reality (MR). We provide students with
+      resources and opportunities to explore XR through hands-on tutorials,
+      projects, hackathons, game nights, open lab hours, mentor office hours,
+      and more!
+    </p>
+    <ImageCard objectFit={"contain"} src={BS} alt="Image of people in the " />
+    <h1>What do we do?</h1>
     <Group direction="row">
       <InfoCard
         icon={"mdiBook"}

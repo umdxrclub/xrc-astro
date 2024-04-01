@@ -6,15 +6,16 @@ import Group from '../layouts/Group.astro';
 type Props = {
   href?: string;
   text?: string;
+  noTint?: boolean;
 };
 
-const { href, text } = Astro.props;
+const { href, text, noTint } = Astro.props;
 
 let imgUrl = href ? href : (await getImage({src: lab, format: "webp"})).src
 const style = { backgroundImage: `url(${imgUrl})` };
 ---
 
-<div style={style}>
+<div class={(noTint) ? undefined : "tint"} style={style}>
   <Group>
     {text ? <h1>{text}</h1> : <slot />}
   </Group>
@@ -42,5 +43,11 @@ const style = { backgroundImage: `url(${imgUrl})` };
     color:white;
     font-size: 6em;
     text-shadow: black 2px 5px 20px;
+  }
+
+  .tint {
+    background-color: color-mix(in srgb, var(--xr-secondary) 75%, transparent);
+    background-blend-mode: multiply;
+    background-repeat: no-repeat;
   }
 </style>

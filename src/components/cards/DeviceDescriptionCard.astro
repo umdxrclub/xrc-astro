@@ -1,0 +1,45 @@
+---
+import { Image } from "astro:assets";
+import type { Description } from "../../types/PayloadSchema";
+
+import Group from "../../layouts/Group.astro";
+import { xrcPath } from "../../util/xrc-suite";
+import Card from "../Card.astro";
+import DefaultPfp from "../../assets/img/xrc.png";
+
+type Props = {
+  description: Description;
+};
+
+const { description } = Astro.props;
+let imgUrl =
+  typeof description.image === "object"
+    ? xrcPath(description.image!.url!)
+    : undefined;
+---
+
+<Card>
+  <Group alignItems="center">
+    {
+      imgUrl ? (
+        <Image inferSize src={imgUrl} alt={`Image for ${description.name}`} />
+      ) : (
+        <Image src={DefaultPfp} alt={`Image for ${description.name}`} />
+      )
+    }
+    <h2>{description.name}</h2>
+  </Group>
+</Card>
+<style>
+  h2 {
+    text-align: center;
+  }
+
+  img {
+    object-fit: contain;
+    width: 12.5rem;
+    height: 12.5rem;
+    border-radius: 2rem;
+    transition: box-shadow 0.4s;
+  }
+</style>

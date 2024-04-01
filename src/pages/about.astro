@@ -1,14 +1,16 @@
 ---
-import MemberCard from "../components/MemberCard.astro";
-import XRCPage from "../layouts/XRCPage.astro";
-import { fetchWebsite } from "../util/xrc-suite";
-import type { Member } from "../types/PayloadSchema";
-import Card from "../components/Card.astro";
+import { getImage } from "astro:assets";
+import AboutBanner from "../assets/img/lab_bs.jpg";
+import InfoCard from "../components/cards/InfoCard.astro";
+import MemberCard from "../components/cards/MemberCard.astro";
 import Group from "../layouts/Group.astro";
-import { Image } from "astro:assets";
-import Teams from "../assets/img/teams.png";
+import XRCPage from "../layouts/XRCPage.astro";
+import type { Member } from "../types/PayloadSchema";
+import { fetchWebsite } from "../util/xrc-suite";
+import BigLinkButton from "../components/BigLinkButton.astro";
 
 let website = await fetchWebsite();
+let imageHref = (await getImage({ src: AboutBanner })).src;
 const members = website.members?.map((m) => m.member as Member) ?? [];
 const legacyMembers =
   website.legacyMembers
@@ -16,7 +18,7 @@ const legacyMembers =
     .sort((a, b) => a.name.localeCompare(b.name)) ?? [];
 ---
 
-<XRCPage>
+<XRCPage bannerHref={imageHref} bannerText="About">
   <Group>
     <h1>Mission Statement</h1>
     <p>
@@ -32,29 +34,60 @@ const legacyMembers =
       access to XR development equipment and expertise.
     </p>
     <h1>Teams</h1>
-    <!-- <Card color="var(--xr-red)">
-      <Group flex alignItems="left">
-        <h2>Admin</h2>
-      </Group>
-    </Card>
-    <Card color="var(--xr-blue)">
-      <h2>Lab</h2>
-    </Card>
-    <Card color="var(--xr-purple)">
-      <h2>Projects</h2>
-    </Card>
-    <Card color="green">
-      <h2>Events</h2>
-    </Card>
-    <Card color="var(--xr-indigo)">
-      <h2>Media</h2>
-    </Card>
-    <Card color="orange">
-      <h2>Outreach</h2>
-    </Card> -->
-
-    <Image src={Teams} alt="An overview of the different teams of the XR Club" />
-
+    <p>
+      At the XR Club, we firmly believe that everyone can bring something to the
+      club that will make it a better place. We encourage our members to
+      contribute by joining our teams. However, we recognize that UMD students
+      are incredibly talented and wear multiple hats and can have changing
+      interests over time as their skill sets and personalities develop. So, we
+      enable club members to contribute to multiple teams!
+    </p>
+    <p>
+      If you are interested in joining us, please let us know through our
+      Discord or our email and/or applying using the button below!
+    </p>
+    <Group alignItems="center">
+      <BigLinkButton
+        href="https://forms.gle/uLsBXSAFGEk5idiN6"
+        text="Apply Now"
+      />
+    </Group>
+    <br>
+    <div class="team-grid">
+      <InfoCard color="var(--xr-admin)" icon="mdiAccountGroup" title="Admin">
+        The Admin teams includes the President, Vice President, and Treasurer
+        roles. Their responsibility is to keep the club running: coordinating
+        teams, managing finances, doing boring university bureaucracy stuff,
+        etc.
+      </InfoCard>
+      <InfoCard color="var(--xr-lab)" icon="mdiCubeOutline" title="Lab">
+        The Lab team maintains the beloved XR Lab in AVW4176! These people are
+        responsible for keeping the lab open, managing and troubleshooting our
+        equipment, and also ensuring that proper handling, safety, and health
+        procedures are being followed.
+      </InfoCard>
+      <InfoCard color="var(--xr-projects)" icon="mdiCodeTags" title="Projects">
+        The Projects team coordinates our project efforts as well as developing
+        workshop content. They will also gladly help answer your questions with
+        everything regarding XR development. The project team helps to maintain
+        the website you're seeing right now!
+      </InfoCard>
+      <InfoCard color="var(--xr-events)" icon="mdiCalendar" title="Events">
+        The Events team plans and coordinates all the events for the XR Club.
+        This includes our recreational events, field trips, and speaker events.
+        Some of them may even help run game tournaments like Beat Saber and VTOL
+        VR!
+      </InfoCard>
+      <InfoCard color="var(--xr-media)" icon="mdiVideo" title="Media">
+        The Media team helps to create content for our social media and also
+        helps to produce videos and graphics for the XR Club. You can see their
+        work on our Instagram and also our YouTube channel!
+      </InfoCard>
+      <InfoCard color="var(--xr-outreach)" icon="mdiBullhorn" title="Outreach">
+        The Outreach team manages the marketing for our social media accounts
+        and communicates with our partners and reach out to external contacts.
+      </InfoCard>
+    </div>
     <h1>History</h1>
     <p>Coming soon!</p>
 
@@ -82,6 +115,13 @@ const legacyMembers =
   .leadership {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    grid-template-rows: 1fr;
+    grid-gap: 2rem;
+  }
+
+  .team-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(420px, 1fr));
     grid-template-rows: 1fr;
     grid-gap: 2rem;
   }

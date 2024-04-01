@@ -1,5 +1,5 @@
 ---
-import Card from "./Card.astro";
+import Card from "../Card.astro";
 
 import { Image } from "astro:assets";
 
@@ -13,19 +13,29 @@ const { objectFit, padding } = props;
 ---
 
 <Card flex padding={0}>
-  <div style={{padding: padding}}>
-    <Image {...props} style={{objectFit: objectFit ?? "cover"}} />
+  <div class="outer">
+    <div class="inner" style={{padding: padding}}>
+      <Image {...props} style={{objectFit: objectFit ?? "cover"}} />
+    </div>
   </div>
 </Card>
 
 
 <style>
-  div {
+  .outer {
     aspect-ratio: 16/9;
+    overflow: hidden;
   }
+
+  .inner {
+    width: 100%;
+    height: 100%;
+  }
+
   img {
     display: block;
     width: 100%;
     height: 100%;
+    
   }
 </style>

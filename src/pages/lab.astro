@@ -1,20 +1,93 @@
 ---
 import XRCPage from "../layouts/XRCPage.astro";
+import LabBanner from "../assets/img/labevent.jpg";
+import { getImage } from "astro:assets";
+import Card from "../components/Card.astro";
+import LabStatus from "../components/LabStatus";
+import { xrcPath } from "../util/xrc-suite";
+import Group from "../layouts/Group.astro";
+import { fetchWebsite } from "../util/xrc-suite";
+import type { Description } from "../types/PayloadSchema";
+import DeviceDescriptionCard from "../components/cards/DeviceDescriptionCard.astro";
+
+let website = await fetchWebsite();
+const deviceGroups = website.devices ?? [];
+let imageHref = (await getImage({ src: LabBanner })).src;
+let statusUrl = xrcPath("/api/globals/lab/status");
 ---
 
-<XRCPage bannerText="Lab">
-  <h1>The XR Lab</h1>
-  <p>
-    Need a place to chill to some cool VR games (like Beat Saber) and immersive
-    experiences after a long day of classes? Looking to utilize powerful
-    computers to build out your latest AR/VR idea and get some help
-    troubleshooting your XR project? Want to brainstorm new ideas and chat about
-    the future of XR with other members of the club? If so, then stop by the XR
-    Lab (AVW 4176) for our Open Lab Hours for all your XR needs!
-  </p>
-  <h1>Schedule</h1>
-  Coming soon!
-  <h1>Equipment</h1>
-  Coming soon!
+<XRCPage bannerHref={imageHref} bannerText="Lab">
+  <Group gap="2rem">
+    <div class="lab-status-container">
+      <Card>
+        <LabStatus client:only statusUrl={statusUrl} />
+      </Card>
+    </div>
+    <h1>What is The XR Lab?</h1>
+    <p>
+      Need a place to chill to some cool VR games (like Beat Saber) and
+      immersive experiences after a long day of classes? Looking to utilize
+      powerful computers to build out your latest AR/VR idea and get some help
+      troubleshooting your XR project? Want to brainstorm new ideas and chat
+      about the future of XR with other members of the club? If so, then stop by
+      the XR Lab (AVW 4176) for our Open Lab Hours for all your XR needs!
+    </p>
+    <h1>Schedule</h1>
+    Coming soon!
+    <h1>Equipment</h1>
+    <Group gap="3rem">
+      {
+        deviceGroups.map((group) => {
+          let descriptions =
+            group.devices?.map((d) => d.description as Description) ?? [];
+          return (
+            <Group>
+              <h2>{group.title}</h2>
+              <div class="device-grid">
+                {descriptions.map((d) => (
+                  <DeviceDescriptionCard description={d} />
+                ))}
+              </div>
+            </Group>
+          );
+        })
+      }
+    </Group>
+  </Group>
 </XRCPage>
-<style></style>
+<style>
+  h2 {
+    text-transform: uppercase;
+    text-align: center;
+  }
+</style>
+<style is:global>
+  .lab-status-container h1,
+  .lab-status-container h2,
+  .lab-status-container h3,
+  .lab-status-container h4,
+  .lab-status-container h5,
+  .lab-status-container h6 {
+    text-align: center;
+    text-transform: uppercase;
+  }
+
+  .lab-status-container h1 {
+    font-size: 4em;
+  }
+
+  .lab-status-container .lab-open {
+    text-shadow: 0 0 2rem var(--xr-primary);
+  }
+
+  .lab-status-container .lab-closed {
+    color: #666666;
+  }
+
+  .device-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    grid-template-rows: 1fr;
+    grid-gap: 2rem;
+  }
+</style>

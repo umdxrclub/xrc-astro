@@ -235,7 +235,12 @@ export interface Event {
   id: string;
   isPublished: boolean;
   name: string;
-  type?: string | null;
+  tags?:
+    | {
+        tag: string;
+        id?: string | null;
+      }[]
+    | null;
   location?: {
     irl?: string | null;
     online?: string | null;
@@ -247,6 +252,7 @@ export interface Event {
   discord: {
     createGuildEvent: boolean;
     createEmbedMessage: boolean;
+    mentionNotificationRoles: boolean;
     eventMessages?:
       | {
           messageId: string;
@@ -262,8 +268,8 @@ export interface Event {
         }[]
       | null;
   };
-  gcal?: {
-    publishOnGCal?: boolean | null;
+  gcal: {
+    publishOnGCal: boolean;
     events?:
       | {
           eventId: string;
@@ -697,6 +703,13 @@ export interface Bot {
       project?: (string | null) | Role;
     };
   };
+  roles?:
+    | {
+        tag: string;
+        role: string;
+        id?: string | null;
+      }[]
+    | null;
   processDms: boolean;
   updatedAt?: string | null;
   createdAt?: string | null;
@@ -764,6 +777,19 @@ export interface Website {
         id?: string | null;
       }[]
     | null;
+  devices?:
+    | {
+        title: string;
+        devices?:
+          | {
+              description: string | Description;
+              id?: string | null;
+            }[]
+          | null;
+        id?: string | null;
+      }[]
+    | null;
   updatedAt?: string | null;
   createdAt?: string | null;
 }
+
