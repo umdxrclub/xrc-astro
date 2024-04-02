@@ -9,6 +9,7 @@ import Group from "../layouts/Group.astro";
 import { fetchWebsite } from "../util/xrc-suite";
 import type { Description } from "../types/PayloadSchema";
 import DeviceDescriptionCard from "../components/cards/DeviceDescriptionCard.astro";
+import Grid from "../layouts/Grid.astro";
 
 let website = await fetchWebsite();
 const deviceGroups = website.devices ?? [];
@@ -43,11 +44,11 @@ let statusUrl = xrcPath("/api/globals/lab/status");
           return (
             <Group>
               <h2>{group.title}</h2>
-              <div class="device-grid">
+              <Grid numColumns={3}>
                 {descriptions.map((d) => (
                   <DeviceDescriptionCard description={d} />
                 ))}
-              </div>
+              </Grid>
             </Group>
           );
         })

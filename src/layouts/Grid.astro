@@ -1,0 +1,27 @@
+---
+type Props = {
+  numColumns: number;
+  gap?: string;
+};
+
+const { numColumns, gap } = Astro.props;
+---
+
+<div>
+  <slot />
+</div>
+<style define:vars={{ numColumns: numColumns, gap: gap ?? "2rem" }}>
+  div {
+    display: grid;
+    --column-width: min(
+      max(
+        calc(calc(100% - var(--gap) * var(--numColumns)) / (var(--numColumns))),
+        17.5rem
+      ),
+      100%
+    );
+    grid-template-columns: repeat(auto-fill, minmax(var(--column-width), 1fr));
+    grid-template-rows: 1fr;
+    grid-gap: var(--gap);
+  }
+</style>

@@ -1,10 +1,10 @@
 ---
-import IconLinks from "./IconLinks.astro";
-import type { IconLink } from "./IconLinks.astro";
-import BigLinkButton from "./BigLinkButton.astro";
-import ICXR from "../assets/img/icxr.png";
 import { Image } from "astro:assets";
+import ICXR from "../assets/img/icxr.png";
 import Group from "../layouts/Group.astro";
+import BigLinkButton from "./BigLinkButton.astro";
+import type { IconLink } from "./IconLinks.astro";
+import IconLinks from "./IconLinks.astro";
 
 const socials: IconLink[] = [
   {
@@ -40,7 +40,7 @@ const socials: IconLink[] = [
 
 <footer>
   <Group justifyContent="center">
-    <Group direction="row" justifyContent="center">
+    <Group direction="row" alignItems="center" justifyContent="center">
       <BigLinkButton
         href="https://discord.gg/6Bhv6BW72G"
         text="Join Discord"
@@ -52,9 +52,9 @@ const socials: IconLink[] = [
       />
     </Group>
 
-    <Group direction="row">
+    <Group direction="row" alignItems="center" justifyContent="center">
       <a class="icxr" href="https://icxr.org">
-        <Image src={ICXR} alt="The XR Clbu is a member of ICXR" />
+        <Image src={ICXR} alt="The XR Club is a member of ICXR" />
       </a>
       <IconLinks links={socials} scale={1.5} />
     </Group>
@@ -73,6 +73,7 @@ const socials: IconLink[] = [
     flex-direction: column;
     align-items: center;
     gap: 1rem;
+    overflow:hidden;
   }
   .icxr {
     align-items: center;
@@ -83,8 +84,8 @@ const socials: IconLink[] = [
 
   img {
     object-fit: contain;
-    width: 100%;
     height: 100%;
+    width: auto;
   }
 
   p {
