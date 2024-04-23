@@ -1,11 +1,76 @@
 ---
+import {
+type SanitizedEditorConfig,
+} from '@payloadcms/richtext-lexical';
+import type { SerializedEditorState } from 'lexical';
+import { fetchArticle } from '../util/xrc-suite';
 
+import payloadRichText from "@payloadcms/richtext-lexical";
+const {convertLexicalToHTML, consolidateHTMLConverters, defaultSanitizedEditorConfig } = payloadRichText;
 
+type Props = {
+    id: string
+}
 
+async function lexicalToHTML(editorData: SerializedEditorState, editorConfig: SanitizedEditorConfig) {
+  return await convertLexicalToHTML({
+    converters: consolidateHTMLConverters({ editorConfig }),
+    data: editorData,
+  })
+}
+
+const { id } = Astro.props;
+let article = await fetchArticle(id);
+let html = lexicalToHTML(article.content!, defaultSanitizedEditorConfig );
 
 ---
 <div>
+    <div class="article-header">
+        <h1>{article.title}</h1>
+        <h3>Published: ???</h3>
+    </div>
+    <br>
+    <div class="article-content" set:html={html} />
 </div>
 <style>
+.article-header > *{
+    text-align: left;
+}
+</style>
+<style is:global>
+    .article-content *{
+        text-align: left;
+    }
 
+    .article-content > h1 {
+        color: var(--xr-primary);
+        margin-top: 0.67em;
+        margin-bottom: 0.67em;
+        text-transform: none;
+    }
+    .article-content > h2 {
+        color: var(--xr-primary);
+        margin-top: 0.83em;
+        margin-bottom: 0.83em;
+    }
+    .article-content > h3 {
+        color: var(--xr-primary);
+        margin-top: 1em;
+        margin-bottom: 1em;
+    }
+    .article-content > h4 {
+        color: var(--xr-primary);
+        margin-top: 1.33em;
+        margin-bottom: 1.33em;
+    }
+    .article-content > h5 {
+        color: var(--xr-primary);
+        margin-top: 1.67em;
+        margin-bottom: 1.67em;
+    }
+    .article-content > h6 {
+        color: var(--xr-primary);
+        margin-top: 2.33em;
+        margin-bottom: 2.33em;
+    }
 </style>
