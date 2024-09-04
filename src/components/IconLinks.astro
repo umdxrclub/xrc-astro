@@ -15,14 +15,20 @@ export type IconLink = {
 
 const { scale, links } = Astro.props;
 ---
-
-<Group noCollapse direction="row" justifyContent="center" alignItems="center">
-  {
-    links.map((l) => (
-      <a href={l.url}>
-        <MDIcon name={l.icon} scale={scale} />
-      </a>
-    ))
+<div>
+  <Group noCollapse direction="row" justifyContent="center" alignItems="center" wrap="wrap">
+    {
+      links.map((l) => (
+        <a href={l.url}>
+          <MDIcon name={l.icon} scale={scale} />
+        </a>
+      ))
+    }
+  </Group>
+</div>
+<style>
+  div {
+    padding-left: 1rem;
+    padding-right: 1rem;
   }
-</Group>
-<style></style>
+</style>

@@ -5,6 +5,7 @@ type Props = {
   gap?: CSSProperties["gap"];
   direction?: CSSProperties["flexDirection"];
   justifyContent?: CSSProperties["justifyContent"];
+  wrap?: CSSProperties["flexWrap"];
   alignItems?: CSSProperties["alignItems"];
   noCollapse?: boolean;
   flex?: boolean | number;
@@ -17,6 +18,7 @@ const {
   alignItems,
   direction,
   noCollapse,
+  wrap,
   class: cssClass,
   flex,
 } = Astro.props;
@@ -33,6 +35,7 @@ let divStyle: astroHTML.JSX.CSSProperties = {
   flexDirection: direction,
   justifyContent: justifyContent,
   alignItems: alignItems,
+  flexWrap: wrap,
   flex: typeof flex == "boolean" ? (flex ? 1 : undefined) : flex,
 };
 ---

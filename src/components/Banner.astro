@@ -17,7 +17,7 @@ const style = { backgroundImage: `url(${imgUrl})` };
 
 <div class={(noTint) ? undefined : "tint"} style={style}>
   <Group>
-    {text ? <h1>{text}</h1> : <slot />}
+    {text ? <h1>{text}</h1> : <slot/>}
   </Group>
 </div>
 
@@ -30,24 +30,27 @@ const style = { backgroundImage: `url(${imgUrl})` };
     padding-left: 1rem;
     padding-right: 1rem;
     padding-bottom: 1rem;
-    padding-top: 7rem;
+    padding-top: 2rem;
+    margin-top: 5rem;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     background-size: cover;
     background-position: center;
-    border-bottom: solid var(--xr-secondary) 1px;
+    border-bottom: solid var(--xr-primary) 1px;
     overflow: hidden;
   }
 
   h1 {
     color:white;
     font-size: 6em;
-    text-shadow: black 2px 5px 20px;
+    font-weight: 500;
+    text-shadow: black 2px 5px 10px;
+    text-transform: uppercase;
   }
 
   .tint {
-    background-color: color-mix(in srgb, var(--xr-secondary) 75%, transparent);
+    background-color: color-mix(in srgb, var(--xr-primary) 60%, black);
     background-blend-mode: multiply;
     background-repeat: no-repeat;
   }

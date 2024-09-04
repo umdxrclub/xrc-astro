@@ -1,14 +1,19 @@
 ---
 import BS from "../assets/img/bs.jpg";
+import BigLinks from "../components/BigLinks.astro";
+import AVPImage from "../assets/img/avp.jpg";
 import ImageCard from "../components/cards/ImageCard.astro";
 import InfoCard from "../components/cards/InfoCard.astro";
 import WelcomeBanner from "../components/WelcomeBanner.astro";
 import Group from "../layouts/Group.astro";
 import XRCPage from "../layouts/XRCPage.astro";
+import { getImage } from "astro:assets";
+
+let imageHref = (await getImage({ src: AVPImage })).src;
 ---
 
-<XRCPage bannerNoTint>
-  <WelcomeBanner slot="banner" />
+<XRCPage>
+  <WelcomeBanner slot="banner"/>
   <Group gap="2rem">
     <h1>What is the XR Club?</h1>
     <p>
@@ -19,7 +24,7 @@ import XRCPage from "../layouts/XRCPage.astro";
       projects, hackathons, game nights, open lab hours, mentor office hours,
       and more!
     </p>
-    <ImageCard objectFit={"contain"} src={BS} alt="Image of people in the " />
+    <ImageCard src={AVPImage} alt="Image of people in the " />
     <h1>What do we do?</h1>
     <Group direction="row">
       <InfoCard

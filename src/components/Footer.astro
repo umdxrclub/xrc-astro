@@ -5,6 +5,7 @@ import Group from "../layouts/Group.astro";
 import BigLinkButton from "./BigLinkButton.astro";
 import type { IconLink } from "./IconLinks.astro";
 import IconLinks from "./IconLinks.astro";
+import BigLinks from "./BigLinks.astro";
 
 const socials: IconLink[] = [
   {
@@ -40,17 +41,7 @@ const socials: IconLink[] = [
 
 <footer>
   <Group justifyContent="center">
-    <Group direction="row" alignItems="center" justifyContent="center">
-      <BigLinkButton
-        href="https://discord.gg/mn8ZKTwXFQ"
-        text="Join Discord"
-        buttonColor="#5865F2"
-      />
-      <BigLinkButton
-        href="https://terplink.umd.edu/organization/xr-club"
-        text="Join TerpLink"
-      />
-    </Group>
+    <BigLinks />
 
     <Group direction="row" alignItems="center" justifyContent="center">
       <a class="icxr" href="https://icxr.org">
@@ -64,7 +55,7 @@ const socials: IconLink[] = [
 </footer>
 <style>
   footer {
-    border-top: solid var(--xr-secondary) 1px;
+    border-top: solid var(--xr-primary) 1px;
     min-height: 128px;
     padding: 2rem;
     background-color: var(--xr-background);

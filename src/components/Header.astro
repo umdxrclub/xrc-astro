@@ -51,24 +51,26 @@ let base = process.env.SITE_BASE ? "/" + process.env.SITE_BASE : ""
     --blur-color: rgba(0, 0, 0, 0.5);
     --nav-open-time: 0.25s;
 
-    position: absolute;
+    position: fixed;
     box-sizing: border-box;
-    padding-top: 2rem;
-    padding-left: 2rem;
-    padding-right: 2rem;
+    padding: 2rem;
+    top: 0;
     left: 0;
     right: 0;
     z-index: 1;
     color: white;
     font-size: 1.25em;
+    border-top: 0;
+    border-left: 0;
+    border-right: 0;
+    border-bottom: 0.25rem;
+    border-color: var(--xr-primary);
+    border-style: solid;
+    box-shadow: 0 10px 20px var(--xr-background);
+
     display: flex;
     flex-wrap: wrap;
-    background: linear-gradient(
-      var(--blur-color) 0%,
-      var(--blur-color) calc(100% - var(--blur-width)),
-      transparent 100%
-    );
-    padding-bottom: calc(var(--blur-gap) + var(--blur-width));
+    background: var(--xr-background);
   }
 
   header > * {
@@ -77,8 +79,15 @@ let base = process.env.SITE_BASE ? "/" + process.env.SITE_BASE : ""
 
   a {
     text-decoration: none;
-    color: white;
+    color: var(--text-color);
     text-transform: uppercase;
+    font-weight: 700;
+    transform: ;
+    transition: color 0.1s;
+  }
+
+  a:hover {
+    color: var(--xr-primary);
   }
 
   nav {
@@ -114,11 +123,6 @@ let base = process.env.SITE_BASE ? "/" + process.env.SITE_BASE : ""
       left: 0;
       right: 0;
       bottom: 0;
-      background: linear-gradient(
-        black 0%,
-        black calc(100% - var(--blur-width)),
-        transparent 100%
-      );
       pointer-events: none;
     }
 
@@ -126,12 +130,14 @@ let base = process.env.SITE_BASE ? "/" + process.env.SITE_BASE : ""
       opacity: 0.9;
     }
 
+    nav::before {
+      content: "";
+    }
+
     nav {
       flex-direction: column;
       flex-basis: 100%;
-      padding-top: 2rem;
-      min-height: 2rem;
-      max-height: 2rem;
+      max-height: 0;
       align-items: flex-start;
     }
 
