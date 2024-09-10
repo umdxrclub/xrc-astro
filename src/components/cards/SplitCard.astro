@@ -1,0 +1,31 @@
+---
+import Card from "../Card.astro";
+
+---
+<Card padding={0}>
+    <div class="split-top">
+      <slot name="top"/>
+    </div>
+    <div class="split-bottom">
+    <slot/>
+  </div>
+  </div>
+</Card>
+<style>
+
+  .split-top {
+    align-self: center;
+    overflow: hidden;
+    border-top: 0;
+    border-left: 0;
+    border-right: 0;
+    border-bottom: 0.1rem;
+    border-style: solid;
+    border-color: var(--xr-primary);
+    background-color: var(--xr-background);
+  }
+
+  .split-bottom {
+    padding: 1.5rem;
+  }
+</style>

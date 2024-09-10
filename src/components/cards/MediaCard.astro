@@ -1,0 +1,27 @@
+---
+import SplitCard from "./SplitCard.astro";
+
+import { Image } from "astro:assets";
+
+type Props = (typeof Image)["arguments"];
+const props = Astro.props;
+
+---
+
+<SplitCard>
+    <div class="media-card-img" slot="top">
+        <Image {...props} />
+    </div>
+    <slot />
+</SplitCard>
+<style>
+    .media-card-img {
+        aspect-ratio: 16/9;
+    }
+
+    img {
+        display: block;
+        width: 100%;
+        height: 100%;
+    }
+</style>

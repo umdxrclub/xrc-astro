@@ -5,6 +5,9 @@ import { fetchEvents } from "../util/xrc-suite";
 import Group from "../layouts/Group.astro";
 import { getImage } from "astro:assets";
 import EventsBanner from "../assets/img/events_crop.jpg"
+import Grid from "../layouts/Grid.astro";
+import BigLinkButton from "../components/BigLinkButton.astro";
+import { DiscordInviteUrl, GoogleCalendarUrl } from "../types/links";
 
 let events = await fetchEvents();
 let imageHref = (await getImage({src: EventsBanner})).src
@@ -12,9 +15,12 @@ let imageHref = (await getImage({src: EventsBanner})).src
 ---
 
 <XRCPage bannerHref={imageHref} bannerText="Events">
-  <Group>
+  <Group alignItems="center">
+    <p>The XR Club hosts many events from Beat Saber nights to Blender workshops. Be sure to join our <a href={DiscordInviteUrl}>Discord</a> and our <a href={GoogleCalendarUrl}>Google Calendar</a> so that you'll never miss an event!</p>
+    <Grid numColumns={2}>
     {events.map((e) => <EventCard event={e} />)}
-  </Group>
+  </Grid>
+</Group>
 </XRCPage>
 <style>
 </style>

@@ -3,11 +3,10 @@ type Props = {
   event: Event;
 };
 
-import { Image } from "astro:assets";
-import type { Event } from "../../types/PayloadSchema";
-import Card from "../Card.astro";
-import lab from "../../assets/img/lab.jpg";
 import Group from "../../layouts/Group.astro";
+import type { Event } from "../../types/PayloadSchema";
+import MediaCard from "./MediaCard.astro";
+import lab from "../../assets/img/lab.jpg";
 
 const { event } = Astro.props;
 
@@ -27,72 +26,69 @@ let dateStr = dateFormatter.format(startDate);
 let startTime = timeFormatter.format(startDate);
 let endTime = timeFormatter.format(endDate);
 
-let timeStr = `${startTime} to ${endTime}`;
+let timeStr = `${startTime} - ${endTime}`;
+let dateTimeStr = `${dateStr} | ${timeStr}`;
 
 let irl = event.location?.irl;
 let online = event.location?.online;
 ---
 
-<Card>
-  <div class="event">
-    <Group direction="row">
-      <Group flex gap={0}>
-        <h1>{event.name}</h1>
-        <h2>{dateStr}</h2>
-        <h4>{timeStr}</h4>
-        {
-          irl ? (
-            <div class="location">
-              <h4>In Person:</h4>
-              {irl}
-            </div>
-          ) : null
-        }
-        {
-          online ? (
-            <div class="location">
-              <h4>Online: </h4>
-              {online}
-            </div>
-          ) : null
-        }
-        <br />
-        <p>{event.description}</p>
-      </Group>
-      <div class="img-container">
-        {
-          event.thumbnail ? (
-            <Image
-              inferSize
-              src={event.thumbnail}
-              alt={`Thumbnail for ${event.name}`}
-            />
-          ) : (
-            <Image src={lab} alt={`Thumbnail for ${event.name}`} />
-          )
-        }
-      </div>
+<MediaCard inferSize={!!event.thumbnail} src={event.thumbnail ?? lab} alt=`Thumbnail for ${event.name}`>
+  <Group direction="column">
+    <Group flex gap="0.25rem">
+      <h3 class="event-name">{event.name}</h1>
+      <h5>{dateTimeStr}</h5>
+      {
+        irl ? (
+          <div class="location">
+            <h5>In Person: {irl}</h5>
+
+          </div>
+        ) : null
+      }
+      {
+        online ? (
+          <div class="location">
+            <h5>Online: {online}</h5>
+
+          </div>
+        ) : null
+      }
     </Group>
-  </div>
-</Card>
+    <p>{event.description}</p>
+  </Group>
+</MediaCard>
 <style>
   .event {
     width: 100%;
     align-self: start;
   }
 
+  .event-name {
+    color: var(--xr-primary);
+  }
+
+  .event-description {
+    padding: 1.5rem;
+  }
+
   img {
     object-fit: cover;
     width: 100%;
     height: 100%;
-    border-radius: 1rem;
   }
 
   .img-container {
     align-self: center;
-    width: 20rem;
+    width: 100%;
     overflow: hidden;
     aspect-ratio: 16/9;
+    border-top: 0;
+    border-left: 0;
+    border-right: 0;
+    border-bottom: 0.1rem;
+    border-style: solid;
+    border-color: var(--xr-primary);
   }
   h1,
   h2,
@@ -103,6 +99,10 @@ let online = event.location?.online;
   p {
     margin: 0;
     text-align: left !important;
+  }
+
+  h5 {
+    font-weight: 500;
   }
 
   h2 {
@@ -124,26 +124,4 @@ let online = event.location?.online;
     flex-wrap: wrap;
   }
 
-  @media (orientation: portrait) {
-    h1,
-    h2,
-    h3,
-    h4,
-    h5,
-    h6 {
-      text-align: center !important;
-    }
-
-    .img-container {
-      width: 100%;
-    }
-
-    .info {
-      justify-content: center;
-    }
-
-    .location {
-      justify-content: center;
-    }
-  }
 </style>

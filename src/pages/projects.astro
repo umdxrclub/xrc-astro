@@ -1,11 +1,14 @@
 ---
+import SplitCard from "../components/cards/SplitCard.astro";
 import XRCPage from "../layouts/XRCPage.astro";
-import XRCPageContent from "../layouts/XRCPageContent.astro";
 ---
 <XRCPage bannerText="Projects">
-    <XRCPageContent>
-        At XR Club, we want to empower every student to explore the XR space through creation.
-    </XRCPageContent>
+    At XR Club, we want to empower every student to explore the XR space through creation.
+        <SplitCard>
+            <div slot="top">
+                hello
+            </div>
+            <h1>Hello there</h1>
+        </SplitCard>
 </XRCPage>
-<style>
-</style>
+
