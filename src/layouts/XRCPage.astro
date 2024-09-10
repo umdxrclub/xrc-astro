@@ -4,20 +4,37 @@ import Footer from "../components/Footer.astro";
 import Banner from "../components/Banner.astro";
 import XRCPageContent from "../layouts/XRCPageContent.astro";
 import Firebase from "../components/Firebase.astro";
+import lab from "../assets/img/lab.jpg"
+import { getImage } from "astro:assets";
 
 interface Props {
   bannerHref?: string;
   bannerText?: string;
   bannerNoTint?: boolean;
+  title: string;
+  description?: string;
 }
 
-const { bannerHref, bannerText, bannerNoTint } = Astro.props;
+const { bannerHref, bannerText, bannerNoTint, title } = Astro.props;
+const pageTitle = title.length > 0 ? `${title} | XR Club @ UMD` : "XR Club @ UMD"
+const pageDescription = "The XR Club at the University of Maryland: College Park provides its members access to cutting edge virtual, augmented, and immersive technologies.";
+const pageImageUrl = bannerHref ?? (await getImage({ src: lab})).src;
+const faviconHref = "/favicon.png";
 ---
 
 <!doctype html>
 <html lang="en">
   <head>
-    <title>XR Club @ UMD</title>
+    <title>{pageTitle}</title>
+
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={pageDescription} />
+    <meta property="og:image" content={pageImageUrl} />
+    <meta property="og:type" content="website" />
+
+    <link rel="icon" type="image/png" sizes="any" href={faviconHref}} />
+    <link rel="apple-touch-icon" type="image/png" href={faviconHref}>
+
     <meta name="theme-color" content="#0b040a" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -93,7 +110,7 @@ const { bannerHref, bannerText, bannerNoTint } = Astro.props;
   h1 {
     font-stretch: ultra-expanded;
   }
-  
+
   a {
     color: var(--xr-secondary);
   }

@@ -12,7 +12,7 @@ import { getImage } from "astro:assets";
 let imageHref = (await getImage({ src: AVPImage })).src;
 ---
 
-<XRCPage>
+<XRCPage title="">
   <WelcomeBanner slot="banner"/>
   <Group gap="2rem">
     <h1>What is the XR Club?</h1>

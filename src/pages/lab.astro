@@ -17,7 +17,7 @@ let imageHref = (await getImage({ src: LabBanner })).src;
 let statusUrl = xrcPath("/api/globals/lab/status");
 ---
 
-<XRCPage bannerHref={imageHref} bannerText="Lab">
+<XRCPage title="Lab" bannerHref={imageHref} bannerText="Lab">
   <Group gap="2rem">
     <div class="lab-status-container">
       <Card>
